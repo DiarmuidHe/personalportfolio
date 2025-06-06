@@ -8,12 +8,8 @@ body {
   
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-    
-}
-main{
+.background{
+  font-family: 'Fira Code', 'JetBrains Mono', 'Source Code Pro', Menlo, Monaco, Consolas, monospace;
   background-color: rgba(0, 0, 0, 0.922);
   color:rgb(240, 234, 230);
 }

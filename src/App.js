@@ -5,9 +5,9 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import { useState, useEffect } from 'react';
 import Navigation from "./components/Navigation/Navigation";
-import HomeSection from "./components/Home/Home";
-import AchievementsSection from "./components/Achievement/Achievement";
-import ProjectsSection from "./components/Project/Project";
+import HomeSection from "./components/HomeSection/Home";
+import AchievementsSection from "./components/AchievementSection/Achievement";
+import ProjectsSection from "./components/ProjectSection/Project";
 import './App.css';
 
 function App() {
@@ -41,8 +41,10 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <HomeSection />
+    <div className="background">
+      <div style={{ height: '94vh' }}>
+        <HomeSection activeSection={activeSection} />
+      </div>
       <Navigation activeSection={activeSection} />
       <ProjectsSection />
       <AchievementsSection />
