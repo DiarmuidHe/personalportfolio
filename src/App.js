@@ -42,7 +42,7 @@ function App() {
 
   return (
     <div className="background">
-      <div style={{ height: '94vh' }}>
+      <div style={{ height: '100vh' }}>
         <HomeSection activeSection={activeSection} />
       </div>
       <Navigation activeSection={activeSection} />
