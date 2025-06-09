@@ -1,6 +1,6 @@
 .btn{
     border: 2px solid rgb(59, 152, 219);
-    color:white
+    color: rgb(0, 0, 0)
 }
 .btn:hover{
     color: rgb(59, 152, 219);

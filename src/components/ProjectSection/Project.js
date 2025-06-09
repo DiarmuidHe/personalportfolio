@@ -22,16 +22,6 @@ const ProjectsSection = () => {
           <div className="container">
             <h2>Projects</h2>
 
-            <svg id="progress" width="80" height="80" viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="30" pathLength="1" className="bg" />
-              <motion.circle
-                cx="50"
-                cy="50"
-                r="30"
-                className="indicator"
-                style={{ pathLength: scrollXProgress }}
-              />
-            </svg>
 
             <motion.ul className="slider-list" ref={ref} style={{ maskImage }}>
               {[1, 2, 3, 4, 5, 6].map((item) => (
