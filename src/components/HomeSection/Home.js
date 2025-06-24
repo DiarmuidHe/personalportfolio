@@ -20,13 +20,13 @@ const HomeSection = ({ activeSection }) => {
         width: '100%', textAlign: 'center' }}>
       {/* Profile Image at Top */}
       <motion.img
-        src="/ProfileIMG.jpg"
+        src="/ProfileIMG.png"
         alt="Diarmuid Hession profile"
         initial={{ opacity: 0, y: -50 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
         transition={{ duration: 0.8 }}
         style={{
-          width: '200px',
+          width: '195px',
           height: '200px',
           objectFit: 'cover',
           borderRadius: '50%',
@@ -72,9 +72,14 @@ const HomeSection = ({ activeSection }) => {
           className={`nav-link ${activeSection === 'Home' ? 'active fw-bold' : ''}`}
           style={{ cursor: "pointer", marginTop: '2rem' }}
         >
-          <div className="btn">
-            <h3>View my work &darr;</h3>
-          </div>
+
+            <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            View my work &darr;
+          </motion.button>
         </Link>
       </motion.div>
     </main>
