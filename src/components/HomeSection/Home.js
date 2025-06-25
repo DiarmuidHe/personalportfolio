@@ -31,7 +31,7 @@ const HomeSection = ({ activeSection }) => {
           objectFit: 'cover',
           borderRadius: '50%',
           marginBottom: '2rem',
-          boxShadow: '0 4px 20px rgba(59, 152, 219,0.9)'
+          boxShadow: '0 4px 20px #07376a'
         }}
       />
 
@@ -43,7 +43,7 @@ const HomeSection = ({ activeSection }) => {
         transition={{ duration: 0.8 }}
       >
         <h1>
-          Hi, I’m <span style={{ color: "rgb(59, 152, 219)", fontWeight:"bold" }}>Diarmuid Hession</span>.
+          Hi, I’m <span style={{ color: "#07376a", fontWeight:"bold" }}>Diarmuid Hession</span>.
         </h1>
       </motion.div>
 
@@ -69,16 +69,17 @@ const HomeSection = ({ activeSection }) => {
           to="projects"
           smooth={true}
           duration={250}
-          className={`nav-link ${activeSection === 'Home' ? 'active fw-bold' : ''}`}
           style={{ cursor: "pointer", marginTop: '2rem' }}
         >
 
-            <motion.button
+        <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 300 }}
+            className="btnViewWork"
           >
-            View my work &darr;
+            <h2> View my work &darr;</h2>
+           
           </motion.button>
         </Link>
       </motion.div>

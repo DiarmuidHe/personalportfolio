@@ -1,26 +1,40 @@
 "use client";
-
 import { Element } from "react-scroll";
+import { useRef } from "react";
+import { useInView } from "framer-motion";
+
 import {
   animate,
   motion,
   useMotionValue,
   useMotionValueEvent,
-  useScroll,
+  useScroll
+  
 } from "framer-motion";
-import { useRef } from "react";
+
 
 const ProjectsSection = () => {
   const ref = useRef(null);
+  const isInView = useInView(ref, { margin: "-100px", once: false });
+
   const { scrollXProgress } = useScroll({ container: ref });
   const maskImage = useScrollOverflowMask(scrollXProgress);
 
   return (
     <Element name="projects" id="projects">
       <main style={{ overflowX: "hidden" }}>
-        <div style={{ height: "100vh", paddingTop: "56px", position: "relative" }}>
+        <div style={{ height: "100vh", paddingTop: "70px", position: "relative" }}>
           <div className="container">
-            <h2>Projects</h2>
+            
+            <motion.div
+              ref={ref}
+              initial={{ x: -200, opacity: 0 }}
+              animate={isInView ? { x: 0, opacity: 1 } : { x: -200, opacity: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h1 className="fw-bold page-title">Projects</h1>
+            </motion.div>
+
 
 
             <motion.ul className="slider-list" ref={ref} style={{ maskImage }}>

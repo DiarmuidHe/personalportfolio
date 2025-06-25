@@ -1,7 +1,14 @@
-.btn{
-    border: 2px solid rgb(59, 152, 219);
-    color: rgb(0, 0, 0)
+
+.btnViewWork{
+    border: transparent;
+    color: rgb(236, 229, 229);
+    background-color: #07376a;
+    border-radius: 200px;
+    height: 4em;
+    width: 17.5em;
 }
-.btn:hover{
-    color: rgb(59, 152, 219);
+.btnViewWork:hover{
+    border: solid 2px #07376a;
+    color: rgb(0, 0, 0);
+    background-color: transparent;
 }

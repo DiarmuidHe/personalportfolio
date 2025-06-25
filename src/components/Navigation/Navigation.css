@@ -1,3 +1,22 @@
 .navbar-brand{
-    color: rgb(59, 152, 219);
+    color: #07376a;
+}
+.nav-link {
+
+  transition: all 0.3s ease;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-link:hover {
+  color: #07376a; /* Hover color */
+  border-bottom: 2px solid #07376a;
+}
+
+.nav-link.active {
+  color: #07376a; /* Active color */
+  border-bottom: 2px solid #07376a;
+}
+.navLogo{
+    height: 2em;
 }

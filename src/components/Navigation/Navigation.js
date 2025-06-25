@@ -11,10 +11,10 @@ const Navigation = ({ activeSection }) => {
             to="Home" 
             smooth={true} 
             duration={250} 
-            className={`navbar-brand ${activeSection === 'Home' ? 'active fw-bold' : ''}`}
+            className={`fw-bold navbar-brand ${activeSection === 'Home' ? 'active fw-bold' : ''}`}
             style={{ cursor: "pointer" }}
           >
-            DH
+            <img src="/Logo.png" alt="a prespective view of a logo of diarmuid hession initials (dh)" className="navLogo" />
           </Link>
           
           {/* Toggler button */}
@@ -67,6 +67,18 @@ const Navigation = ({ activeSection }) => {
                   onClick={() => document.getElementById('navbarNav').classList.remove('show')}
                 >
                   Achievements
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link 
+                  to="contact" 
+                  smooth={true} 
+                  duration={250} 
+                  className={`nav-link ${activeSection === 'contact' ? 'active fw-bold' : ''}`}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => document.getElementById('navbarNav').classList.remove('show')}
+                >
+                  Contact
                 </Link>
               </li>
             </ul>

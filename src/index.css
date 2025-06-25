@@ -7,8 +7,11 @@ body {
 }
 
 .background{
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Inter', sans-serif;
   background-color: rgba(238,238,238);
   color:rgba(0, 0, 0, 0.922);
 
+}
+.page-title{
+  color:#07376a;
 }
