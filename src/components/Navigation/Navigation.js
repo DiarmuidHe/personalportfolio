@@ -71,10 +71,10 @@ const Navigation = ({ activeSection }) => {
               </li>
               <li className="nav-item">
                 <Link 
-                  to="contact" 
-                  smooth={true} 
-                  duration={250} 
-                  className={`nav-link ${activeSection === 'contact' ? 'active fw-bold' : ''}`}
+                    to="contact"
+                    smooth={true}
+                    duration={250}
+                    className={`nav-link ${activeSection === 'contact' ? 'active fw-bold' : ''}`}
                   style={{ cursor: "pointer" }}
                   onClick={() => document.getElementById('navbarNav').classList.remove('show')}
                 >

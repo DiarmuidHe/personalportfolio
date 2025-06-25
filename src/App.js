@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation/Navigation";
 import HomeSection from "./components/HomeSection/Home";
 import AchievementsSection from "./components/AchievementSection/Achievement";
 import ProjectsSection from "./components/ProjectSection/Project";
+import ContactSection from "./components/ContactSection/Contact";
 import './App.css';
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 100;
       
-      const sections = ['Home', 'projects', 'achievements'].map(section => {
+      const sections = ['Home', 'projects', 'achievements', 'contact'].map(section => {
         const element = document.getElementById(section);
         return {
           id: section,
@@ -48,6 +49,7 @@ function App() {
       <Navigation activeSection={activeSection} />
       <ProjectsSection />
       <AchievementsSection />
+      <ContactSection/>
     </div>
   );
 }
