@@ -3,15 +3,8 @@ import { Element } from "react-scroll";
 import { useRef } from "react";
 import { useInView } from "framer-motion";
 import React, { useState } from 'react';
-import {
-  animate,
-  motion,
-  useMotionValue,
-  useMotionValueEvent,
-  useScroll
-  
-} from "framer-motion";
-
+import { motion } from "framer-motion";
+import emailjs from '@emailjs/browser';
 
 
   
@@ -27,18 +20,32 @@ const ContactSection = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Here you can integrate email service like EmailJS or backend API
-  };
+const handleSubmit = (e) => {
+  e.preventDefault();
+
+  emailjs.send(
+    'service_PortfolioWebsite',
+    'template_yi90298',
+    formData,
+    'Xve_WZi_W9ZM1YQXP'
+  )
+  .then((result) => {
+      console.log('Email sent:', result.text);
+      alert('Message sent successfully!');
+      setFormData({ name: '', email: '', message: '' });
+  })
+  .catch((error) => {
+      console.error('Email error:', error);
+      alert('Failed to send message. Please try again.');
+  });
+};
   const ref = useRef(null);
   const isInView = useInView(ref, { margin: "-100px", once: false });
 
   return (
     <Element name="contact" id="contact">
       <main style={{ overflowX: "hidden" }}>
-        <div style={{ height: "95vh", paddingTop: "70px" }}>
+        <div style={{ height: "95vh", paddingTop: "70px"  ,position: "relative"}}>
           <div className="container">
             
             <motion.div
@@ -55,7 +62,7 @@ const ContactSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: 'easeOut' }}
             >
-              <form onSubmit={handleSubmit} className="mx-auto" style={{ maxWidth: '600px' }}>
+              <form onSubmit={handleSubmit} className="mx-auto">
                 <div className="mb-3">
                   <label htmlFor="name" className="form-label">Name</label>
                   <input 

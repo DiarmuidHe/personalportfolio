@@ -8,7 +8,7 @@ const AchievementsSection = () => {
   const isInView = useInView(ref, { margin: "-100px", once: false });
   return (
     <Element name="achievements" id="achievements">
-      <main style={{ height: '100vh', paddingTop: '70px' }}>
+      <main style={{ height: '100vh', paddingTop: '70px', overflowX: "hidden"}}>
         
         <div className="container">
           

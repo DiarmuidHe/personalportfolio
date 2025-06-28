@@ -43,7 +43,7 @@ function App() {
 
   return (
     <div className="background">
-      <div style={{ height: '100vh' }}>
+      <div style={{ height: '100vh', overflow:'hidden' }}>
         <HomeSection activeSection={activeSection} />
       </div>
       <Navigation activeSection={activeSection} />
