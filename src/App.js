@@ -9,6 +9,7 @@ import HomeSection from "./components/HomeSection/Home";
 import AchievementsSection from "./components/AchievementSection/Achievement";
 import ProjectsSection from "./components/ProjectSection/Project";
 import ContactSection from "./components/ContactSection/Contact";
+import FooterSection from "./components/FooterSection/footer";
 import './App.css';
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
       <ProjectsSection />
       <AchievementsSection />
       <ContactSection/>
+      <FooterSection/>
     </div>
   );
 }

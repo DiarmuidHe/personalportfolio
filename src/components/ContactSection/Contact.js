@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { motion } from "framer-motion";
 import emailjs from '@emailjs/browser';
 
-
+import './Contact.css'
   
 const ContactSection = () => {
 
@@ -67,7 +67,7 @@ const handleSubmit = (e) => {
                   <label htmlFor="name" className="form-label">Name</label>
                   <input 
                     type="text"
-                    className="form-control"
+                    className="form-control rounded-4"
                     id="name"
                     name="name"
                     required
@@ -80,7 +80,7 @@ const handleSubmit = (e) => {
                   <label htmlFor="email" className="form-label">Email</label>
                   <input 
                     type="email"
-                    className="form-control"
+                    className="form-control rounded-4"
                     id="email"
                     name="email"
                     required
@@ -92,7 +92,7 @@ const handleSubmit = (e) => {
                 <div className="mb-3">
                   <label htmlFor="message" className="form-label">Message</label>
                   <textarea 
-                    className="form-control"
+                    className="form-control rounded-4"
                     id="message"
                     name="message"
                     rows="5"
@@ -104,11 +104,12 @@ const handleSubmit = (e) => {
 
                 <motion.button
                   type="submit"
-                  className="btn btn-primary"
+                  className="btn rounded-4"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Send Message
+                  <img className="me-2" src="/send.png" height="25em" alt="simple aeroplane send icon"/>
+                  Send
                 </motion.button>
               </form>
             </motion.div>

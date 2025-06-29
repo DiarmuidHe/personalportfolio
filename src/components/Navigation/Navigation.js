@@ -4,7 +4,7 @@ import './Navigation.css'
 const Navigation = ({ activeSection }) => {
   return (
     <div className="sticky-top">
-      <nav className="navbar navbar-expand-lg navbar-light bg-light rounded-3 mb-3">
+      <nav className="navbar navbar-expand-lg navbar-dark rounded-bottom-3 mb-3">
         <div className="container-fluid">
           {/* Brand/logo - removed collapse triggers from this */}
           <Link 
