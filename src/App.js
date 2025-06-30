@@ -44,8 +44,12 @@ function App() {
 
   return (
     <div className="background">
+      
+      
       <div style={{ height: '100vh', overflow:'hidden' }}>
+        <img src="/Logo.png" alt="a prespective view of a logo of diarmuid hession initials (dh)" className="chatBtn" />
         <HomeSection activeSection={activeSection} />
+        
       </div>
       <Navigation activeSection={activeSection} />
       <ProjectsSection />

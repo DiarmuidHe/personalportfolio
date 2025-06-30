@@ -147,7 +147,7 @@ function StyleSheet() {
 
       .slider-list li {
         flex: 0 0 200px;
-        background: var(--accent,rgb(59, 152, 219));
+        background: var(--accent,#07376af1);
         border-radius: 12px;
       }
 
@@ -157,7 +157,7 @@ function StyleSheet() {
       }
 
       #projects ::-webkit-scrollbar-thumb {
-        background: var(--accent,rgb(59, 152, 219));
+        background: var(--accent,#07376af1);
       }
 
       #projects ::-webkit-scrollbar-corner {

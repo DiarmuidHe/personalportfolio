@@ -1,18 +1,21 @@
-import { Element } from "react-scroll";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+"use client"
+
+import { Element } from "react-scroll"
+import { motion, useScroll, useInView } from "framer-motion"
+import { useRef } from "react"
+import './Achievement.css'
+
 
 const AchievementsSection = () => {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { margin: "-100px", once: false })
 
-  const ref = useRef(null);
-  const isInView = useInView(ref, { margin: "-100px", once: false });
   return (
     <Element name="achievements" id="achievements">
-      <main style={{ height: '100vh', paddingTop: '70px', overflowX: "hidden"}}>
-        
-        <div className="container">
-          
+      <main style={{ minHeight: '100vh', paddingTop: '70px', overflowX: "hidden" }}>
+        <div className="container" style={{ position: "relative" }}>
 
+          {/* Title with animation */}
           <motion.div
             ref={ref}
             initial={{ x: -200, opacity: 0 }}
@@ -21,12 +24,11 @@ const AchievementsSection = () => {
           >
             <h1 className="fw-bold page-title">Achievements</h1>
           </motion.div>
+
         </div>
       </main>
-        
-
     </Element>
-  );
-};
+  )
+}
 
-export default AchievementsSection;
+export default AchievementsSection

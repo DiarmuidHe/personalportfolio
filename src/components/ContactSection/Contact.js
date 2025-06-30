@@ -45,7 +45,7 @@ const handleSubmit = (e) => {
   return (
     <Element name="contact" id="contact">
       <main style={{ overflowX: "hidden" }}>
-        <div style={{ height: "95vh", paddingTop: "70px"  ,position: "relative"}}>
+        <div style={{ minHeight: "70vh", paddingTop: "70px"  ,position: "relative"}}>
           <div className="container">
             
             <motion.div

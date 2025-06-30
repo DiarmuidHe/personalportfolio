@@ -1,10 +1,10 @@
 .btn{
     color: rgb(255, 255, 255);
-    background-color: #07376a;
+    background-color: #07376af1;
     font-weight: bold;
     float:right;
 }
 .btn:hover{
-    background-color: #062e59;
+    background-color: #07376a;
     color: rgb(255, 255, 255);
 }

@@ -12,6 +12,7 @@ const HomeSection = ({ activeSection }) => {
 
   return (
     <Element name="Home" id="Home">
+      
       <main className="d-flex flex-column justify-content-center align-items-center" style={{  
         backgroundImage: "url('/HomeBackground.png')",
         backgroundSize: 'cover',
@@ -19,6 +20,7 @@ const HomeSection = ({ activeSection }) => {
         height: '100vh',
         width: '100%', textAlign: 'center' }}>
       {/* Profile Image at Top */}
+      
       <motion.img
         src="/ProfileIMG.png"
         alt="Diarmuid Hession profile"
@@ -84,8 +86,6 @@ const HomeSection = ({ activeSection }) => {
         </Link>
       </motion.div>
     </main>
-
-
 
 
     </Element>
