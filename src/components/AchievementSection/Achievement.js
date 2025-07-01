@@ -1,8 +1,15 @@
 "use client"
 
 import { Element } from "react-scroll"
-import { motion, useScroll, useInView } from "framer-motion"
-import { useRef } from "react"
+import { motion, useInView } from "framer-motion"
+import { useRef, useState } from "react"
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import { Autoplay, EffectCoverflow, Pagination } from 'swiper/modules';
+
 import './Achievement.css'
 
 
@@ -24,6 +31,53 @@ const AchievementsSection = () => {
           >
             <h1 className="fw-bold page-title">Achievements</h1>
           </motion.div>
+          <Swiper
+            effect={'coverflow'}
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={'auto'}
+                    autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+             }}
+            coverflowEffect={{
+              rotate: 50,
+              stretch: 0,
+              depth: 100,
+              modifier: 1,
+              slideShadows: true,
+            }}
+            modules={[Autoplay, EffectCoverflow]}
+            className="mySwiper"
+          >
+            <SwiperSlide>
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpnPyITgxG_s6ny6FX1cAq4_lSIYPUH7JTdA&s" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src="https://skillforge.com/wp-content/uploads/2020/10/javascript.png" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src="https://js.devexpress.com/Content/Images/Frameworks/Angular.png" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src="https://www.jetbrains.com/guide/assets/csharp-logo-265a149e.svg" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/640px-React-icon.svg.png" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src="https://i.scdn.co/image/ab6765630000ba8a49f81331af04ec3614a5a741" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+            </SwiperSlide>
+          </Swiper>
 
         </div>
       </main>
