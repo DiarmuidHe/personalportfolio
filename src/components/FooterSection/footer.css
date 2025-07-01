@@ -1,3 +1,5 @@
 .footer{
-    background-color: #07376af1;
+    background-color: #07376a;
+    position: relative;
+    z-index: 12;
 }

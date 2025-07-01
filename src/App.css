@@ -1,7 +1,19 @@
 .chatBtn{
-    width: 4em;
+    width: 1.2em;
     z-index: 10;
-    position: fixed;
     
 }
 
+.btn{
+    width:8em;
+    color: rgb(255, 255, 255);
+    background-color: #07376a;
+    font-weight: normal;
+    border: solid 2px white;
+    z-index:10;
+    
+}
+.btn:hover{
+    background-color: #07376a;
+    color: rgb(255, 255, 255);
+}

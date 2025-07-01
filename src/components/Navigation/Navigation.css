@@ -22,4 +22,5 @@
 }
 .navbar{
     background-color: #07376af1;
+    z-index: 1;
 }

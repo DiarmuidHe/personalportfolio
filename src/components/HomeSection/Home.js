@@ -6,7 +6,7 @@ import './Home.css'
 
 const HomeSection = ({ activeSection }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { margin: "-100px", once: false });
+  const isInView = useInView(ref, { margin: "-10px", once: false });
 
   console.log("Is in view:", isInView); // Debug line
 
@@ -80,7 +80,7 @@ const HomeSection = ({ activeSection }) => {
             transition={{ type: "spring", stiffness: 300 }}
             className="btnViewWork"
           >
-            <h2> View my work &darr;</h2>
+            <h2>View my work &darr;</h2>
            
           </motion.button>
         </Link>

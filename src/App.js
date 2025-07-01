@@ -45,13 +45,22 @@ function App() {
   return (
     <div className="background">
       
-      
-      <div style={{ height: '100vh', overflow:'hidden' }}>
-        <img src="/Logo.png" alt="a prespective view of a logo of diarmuid hession initials (dh)" className="chatBtn" />
+      <Navigation activeSection={activeSection} />
+      <div style={{ height: '90vh', overflow:'hidden' }}>
+      <button 
+      className="position-fixed bottom-0 end-0 p-3 btn rounded-4 me-2 mb-2 d-flex align-items-center gap-2">
+        <p className="mb-0">Chat</p>
+        <img 
+          src="/chatstars.png"
+          className="chatBtn"
+          alt="a perspective view of a logo of diarmuid hession initials (dh)" 
+        />
+      </button>
+
         <HomeSection activeSection={activeSection} />
         
       </div>
-      <Navigation activeSection={activeSection} />
+      
       <ProjectsSection />
       <AchievementsSection />
       <ContactSection/>
