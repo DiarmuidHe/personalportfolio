@@ -1,3 +1,4 @@
+// App.js
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -10,6 +11,7 @@ import AchievementsSection from "./components/AchievementSection/Achievement";
 import ProjectsSection from "./components/ProjectSection/Project";
 import ContactSection from "./components/ContactSection/Contact";
 import FooterSection from "./components/FooterSection/footer";
+import ChatOverlay from "./components/ChatSection/Chat"; // ✅ Make sure import is correct
 import './App.css';
 
 function App() {
@@ -18,7 +20,7 @@ function App() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 100;
-      
+
       const sections = ['Home', 'projects', 'achievements', 'contact'].map(section => {
         const element = document.getElementById(section);
         return {
@@ -44,27 +46,15 @@ function App() {
 
   return (
     <div className="background">
-      
       <Navigation activeSection={activeSection} />
-      <div style={{ height: '90vh', overflow:'hidden' }}>
-      <button 
-      className="position-fixed bottom-0 end-0 p-3 btn rounded-5 me-2 mb-2 d-flex align-items-center gap-2">
-        <p className="mb-0">Chat</p>
-        <img 
-          src="/chatstars.png"
-          className="chatBtn"
-          alt="a perspective view of a logo of diarmuid hession initials (dh)" 
-        />
-      </button>
-
-        <HomeSection activeSection={activeSection} />
-        
-      </div>
       
+      <ChatOverlay /> 
+
+      <HomeSection activeSection={activeSection} />
       <ProjectsSection />
       <AchievementsSection />
-      <ContactSection/>
-      <FooterSection/>
+      <ContactSection />
+      <FooterSection />
     </div>
   );
 }

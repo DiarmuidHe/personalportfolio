@@ -11,84 +11,86 @@ const HomeSection = ({ activeSection }) => {
   console.log("Is in view:", isInView); // Debug line
 
   return (
-    <Element name="Home" id="Home">
-      
-      <main className="d-flex flex-column justify-content-center align-items-center" style={{  
-        backgroundImage: "url('/HomeBackground.png')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        height: '100vh',
-        width: '100%', textAlign: 'center' }}>
-      {/* Profile Image at Top */}
-      
-      <motion.img
-        src="/ProfileIMG.png"
-        alt="Diarmuid Hession profile"
-        initial={{ opacity: 0, y: -50 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
-        transition={{ duration: 0.8 }}
-        style={{
-          width: '195px',
-          height: '200px',
-          objectFit: 'cover',
-          borderRadius: '50%',
-          marginBottom: '2rem',
-          boxShadow: '0 4px 20px #07376a'
-        }}
-      />
+    <div style={{ height: '90vh', overflow:'hidden' }}>
+      <Element name="Home" id="Home">
+        
+        <main className="d-flex flex-column justify-content-center align-items-center" style={{  
+          backgroundImage: "url('/HomeBackground.png')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          height: '100vh',
+          width: '100%', textAlign: 'center' }}>
+        {/* Profile Image at Top */}
+        
+        <motion.img
+          src="/ProfileIMG.png"
+          alt="Diarmuid Hession profile"
+          initial={{ opacity: 0, y: -50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
+          transition={{ duration: 0.8 }}
+          style={{
+            width: '195px',
+            height: '200px',
+            objectFit: 'cover',
+            borderRadius: '50%',
+            marginBottom: '2rem',
+            boxShadow: '0 4px 20px #07376a'
+          }}
+        />
 
-      {/* First Name */}
-      <motion.div
-        ref={ref}
-        initial={{ x: -200, opacity: 0 }}
-        animate={isInView ? { x: 0, opacity: 1 } : { x: -200, opacity: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <h1>
-          Hi, I’m <span style={{ color: "#07376a", fontWeight:"bold" }}>Diarmuid Hession</span>.
-        </h1>
-      </motion.div>
-
-      {/* Last Name */}
-      <motion.div
-        ref={ref}
-        initial={{ x: 200, opacity: 0 }}
-        animate={isInView ? { x: 0, opacity: 1 } : { x: 200, opacity: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-          <h1>Welcome to my Portfolio!</h1>
-
-      </motion.div>
-
-      {/* CTA Button */}
-      <motion.div
-        ref={ref}
-        initial={{ y: 200, opacity: 0 }}
-        animate={isInView ? { y: 0, opacity: 1 } : { y: 200, opacity: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <Link
-          to="projects"
-          smooth={true}
-          duration={250}
-          style={{ cursor: "pointer", marginTop: '2rem' }}
+        {/* First Name */}
+        <motion.div
+          ref={ref}
+          initial={{ x: -200, opacity: 0 }}
+          animate={isInView ? { x: 0, opacity: 1 } : { x: -200, opacity: 0 }}
+          transition={{ duration: 0.8 }}
         >
+          <h1>
+            Hi, I’m <span style={{ color: "#07376a", fontWeight:"bold" }}>Diarmuid Hession</span>.
+          </h1>
+        </motion.div>
 
-        <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className="btnViewWork"
+        {/* Last Name */}
+        <motion.div
+          ref={ref}
+          initial={{ x: 200, opacity: 0 }}
+          animate={isInView ? { x: 0, opacity: 1 } : { x: 200, opacity: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+            <h1>Welcome to my Portfolio!</h1>
+
+        </motion.div>
+
+        {/* CTA Button */}
+        <motion.div
+          ref={ref}
+          initial={{ y: 200, opacity: 0 }}
+          animate={isInView ? { y: 0, opacity: 1 } : { y: 200, opacity: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <Link
+            to="projects"
+            smooth={true}
+            duration={250}
+            style={{ cursor: "pointer", marginTop: '2rem' }}
           >
-            <h2>View my work &darr;</h2>
-           
-          </motion.button>
-        </Link>
-      </motion.div>
-    </main>
+
+          <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="btnViewWork"
+            >
+              <h2>View my work &darr;</h2>
+            
+            </motion.button>
+          </Link>
+        </motion.div>
+      </main>
 
 
-    </Element>
+      </Element>
+    </div>
   );
 };
 

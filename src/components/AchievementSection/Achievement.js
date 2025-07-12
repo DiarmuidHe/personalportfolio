@@ -30,41 +30,35 @@ const AchievementsSection = () => {
             <h1 className="fw-bold page-title">Achievements</h1>
           </motion.div>
 
-            <Swiper
-              effect="coverflow"
-              grabCursor={true}
-              centeredSlides={true}
-              autoplay={{
-                delay: 2500,
-                disableOnInteraction: false,
-              }}
-              coverflowEffect={{
-                rotate: 50,
-                stretch: 0,
-                depth: 100,
-                modifier: 1,
-                slideShadows: false,
-              }}
-              breakpoints={{
-                0: {
-                  slidesPerView: 1.2,
-                  spaceBetween: 10,
-                },
-                640: {
-                  slidesPerView: 2,
-                  spaceBetween: 20,
-                },
-                1024: {
-                  slidesPerView: 'auto',
-                },
-              }}
-              navigation={{
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-              }}
-              modules={[Autoplay, EffectCoverflow, Navigation]}
-              className="mySwiper"
-            >
+              <Swiper
+                loop={true} 
+                effect="coverflow"
+                grabCursor={true}
+                centeredSlides={true}
+                autoplay={{
+                  delay: 2500,
+                  disableOnInteraction: false,
+                }}
+                coverflowEffect={{
+                  rotate: 50,
+                  stretch: 0,
+                  depth: 100,
+                  modifier: 1,
+                  slideShadows: false,
+                }}
+                breakpoints={{
+                    0: { slidesPerView: 1.2, spaceBetween: 10 },
+                    640: { slidesPerView: 2, spaceBetween: 20 },
+                    1024: { slidesPerView: 3, spaceBetween: 30 }
+                }}
+                navigation={{
+                  nextEl: ".swiper-button-next",
+                  prevEl: ".swiper-button-prev",
+                }}
+                modules={[Autoplay, EffectCoverflow, Navigation]}
+                className="mySwiper"
+              >
+
             <SwiperSlide>
               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpnPyITgxG_s6ny6FX1cAq4_lSIYPUH7JTdA&s" alt="python logo" />
             </SwiperSlide>
