@@ -1,0 +1,25 @@
+{
+    "images":
+    {
+        "profile":"https://d1nolvj4i7s6fp.cloudfront.net/profile_imgs/ProfileIMG.png",
+        "logo":"https://d1nolvj4i7s6fp.cloudfront.net/profile_imgs/logo.png",
+        
+        "languages":[
+            "https://d1nolvj4i7s6fp.cloudfront.net/images/angular.jpg",
+            "https://d1nolvj4i7s6fp.cloudfront.net/images/aws.png",
+            "https://d1nolvj4i7s6fp.cloudfront.net/images/bootstrap.png",
+            "https://d1nolvj4i7s6fp.cloudfront.net/images/c.png",
+            "https://d1nolvj4i7s6fp.cloudfront.net/images/html.png",
+            "https://d1nolvj4i7s6fp.cloudfront.net/images/js.png",
+            "https://d1nolvj4i7s6fp.cloudfront.net/images/node.png",
+            "https://d1nolvj4i7s6fp.cloudfront.net/images/python.png",
+            "https://d1nolvj4i7s6fp.cloudfront.net/images/react.png",
+            "https://d1nolvj4i7s6fp.cloudfront.net/images/SQL.png"
+        ],
+
+        "buttons":{
+            "chat_stars":"https://d1nolvj4i7s6fp.cloudfront.net/btn_images/chatStars.png",
+            "send":"https://d1nolvj4i7s6fp.cloudfront.net/btn_images/send.png"
+        }
+    }
+}

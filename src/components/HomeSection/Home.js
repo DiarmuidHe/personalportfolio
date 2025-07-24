@@ -2,9 +2,11 @@ import { Element } from "react-scroll";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-scroll";
+import data from "../../JsonFolders/portfolio.json"
 import './Home.css'
 
 const HomeSection = ({ activeSection }) => {
+  const images = data.images
   const ref = useRef(null);
   const isInView = useInView(ref, { margin: "-10px", once: false });
 
@@ -22,8 +24,8 @@ const HomeSection = ({ activeSection }) => {
           width: '100%', textAlign: 'center' }}>
         {/* Profile Image at Top */}
         
-        <motion.img
-          src="/ProfileIMG.png"
+        <img
+          src={images.profile}
           alt="Diarmuid Hession profile"
           initial={{ opacity: 0, y: -50 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
@@ -38,36 +40,15 @@ const HomeSection = ({ activeSection }) => {
           }}
         />
 
-        {/* First Name */}
-        <motion.div
-          ref={ref}
-          initial={{ x: -200, opacity: 0 }}
-          animate={isInView ? { x: 0, opacity: 1 } : { x: -200, opacity: 0 }}
-          transition={{ duration: 0.8 }}
-        >
+
           <h1>
             Hi, I’m <span style={{ color: "#07376a", fontWeight:"bold" }}>Diarmuid Hession</span>.
           </h1>
-        </motion.div>
 
-        {/* Last Name */}
-        <motion.div
-          ref={ref}
-          initial={{ x: 200, opacity: 0 }}
-          animate={isInView ? { x: 0, opacity: 1 } : { x: 200, opacity: 0 }}
-          transition={{ duration: 0.8 }}
-        >
+
             <h1>Welcome to my Portfolio!</h1>
 
-        </motion.div>
 
-        {/* CTA Button */}
-        <motion.div
-          ref={ref}
-          initial={{ y: 200, opacity: 0 }}
-          animate={isInView ? { y: 0, opacity: 1 } : { y: 200, opacity: 0 }}
-          transition={{ duration: 0.8 }}
-        >
           <Link
             to="projects"
             smooth={true}
@@ -85,7 +66,6 @@ const HomeSection = ({ activeSection }) => {
             
             </motion.button>
           </Link>
-        </motion.div>
       </main>
 
 

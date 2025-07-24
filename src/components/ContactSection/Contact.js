@@ -5,10 +5,12 @@ import { useInView } from "framer-motion";
 import React, { useState } from 'react';
 import { motion } from "framer-motion";
 import emailjs from '@emailjs/browser';
+import data from "../../JsonFolders/portfolio.json"
 
 import './Contact.css'
   
 const ContactSection = () => {
+  const images = data.images
 
   const [formData, setFormData] = useState({
     name: '',
@@ -108,7 +110,7 @@ const handleSubmit = (e) => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <img className="me-2" src="/send.png" height="25em" alt="simple aeroplane send icon"/>
+                  <img className="me-2" src={images.buttons.send} height="25em" alt="simple aeroplane send icon"/>
                   Send
                 </motion.button>
               </form>

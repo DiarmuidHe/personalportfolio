@@ -1,10 +1,11 @@
 // components/ChatSection/Chat.js
 import React, { useState } from 'react';
-
-
+import data from "../../JsonFolders/portfolio.json"
 export default function ChatOverlay() {
+  const images = data.images
+  
   const [isChatOpen, setIsChatOpen] = useState(false);
-
+  
   const toggleChat = () => {
     setIsChatOpen(prev => !prev);
   };
@@ -18,7 +19,7 @@ export default function ChatOverlay() {
       >
         Chat
         <img 
-          src="/chatstars.png"
+          src={images.buttons.chat_stars}
           className="chatBtn"
           alt="chat icon"
           style={{ width: '24px', height: '24px' }}
