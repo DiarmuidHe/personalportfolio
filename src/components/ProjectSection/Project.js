@@ -1,8 +1,8 @@
 "use client";
 import { Element } from "react-scroll";
 import { useRef } from "react";
-
-
+import data from "../../JsonFolders/portfolio.json"
+import './Project.css'
 import {
   motion,
   useInView
@@ -13,7 +13,7 @@ import {
 const ProjectsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { margin: "-100px", once: false });
-
+  const images = data.images;
 
   return (
     <Element name="projects" id="projects">
@@ -34,7 +34,7 @@ const ProjectsSection = () => {
 
             <div className="container">
               <div className="row">
-                {[1, 2, 3, 4, 5, 6].map((item) => (
+                {images.projects.map((proj, item) => (
                   <div key={item} className="col-6 col-md-4 col-lg-3 mb-4">
                      <motion.div
                         whileHover={{ scale: 1.05, boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)" }}
@@ -42,13 +42,17 @@ const ProjectsSection = () => {
                         className="card"
                         style={{ width: "100%" }}
                       >
-                      <img src="https://i.scdn.co/image/ab6765630000ba8a49f81331af04ec3614a5a741" className="card-img-top" alt={`Project ${item}`} />
+                      
+                      <a href={proj.link} target="_blank" rel="noopener noreferrer">
+                          <img className="project-image" src={proj.src} alt={proj.alt}/>
+                     
                       <div className="card-body">
-                        <h5 className="card-title">Card {item}</h5>
+                        <h5 className="card-title">{proj.title}</h5>
                         <p className="card-text">
-                          Some quick example text to build on the card title and make up the bulk of the card’s content.
+                          {proj.description}
                         </p>
                       </div>
+                       </a>
                     </motion.div>
                   </div>
                 ))}

@@ -21,11 +21,11 @@
   transform: scale(1.05);
 }
 
-.swiper-slide img {
+.swiperImage {
   width: 100%;
   height: 100%;
   object-fit: contain; /* Keeps logo proportions */
-  padding: 20px;        /* Optional: Adds spacing inside the slide */
+  padding: 6em;        /* Optional: Adds spacing inside the slide */
 }
 .swiper-container-wrapper {
   position: relative;

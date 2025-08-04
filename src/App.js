@@ -11,7 +11,8 @@ import AchievementsSection from "./components/AchievementSection/Achievement";
 import ProjectsSection from "./components/ProjectSection/Project";
 import ContactSection from "./components/ContactSection/Contact";
 import FooterSection from "./components/FooterSection/footer";
-import ChatOverlay from "./components/ChatSection/Chat"; // ✅ Make sure import is correct
+import ChatOverlay from "./components/ChatSection/Chat";
+import WeatherTracker from "./components/WeatherTracker/Weather";
 import './App.css';
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
       <ProjectsSection />
       <AchievementsSection />
       <ContactSection />
+      <WeatherTracker/>
       <FooterSection />
     </div>
   );

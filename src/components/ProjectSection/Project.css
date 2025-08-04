@@ -1,0 +1,13 @@
+.project-image{
+    height:13em;
+    width: 100%;
+
+}
+.card {
+  height: 28em;
+  overflow: hidden;
+}
+a {
+  text-decoration: none;
+  color: inherit; /* or set your custom color */
+}
