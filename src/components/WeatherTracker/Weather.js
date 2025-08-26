@@ -92,6 +92,7 @@ const WeatherTracker = () => {
       );
       if (fallbackCity) {
         setCity(fallbackCity);
+        setCoords(null); // reset coords so search works
         await fetchWeather();
       }
     } finally {
@@ -110,6 +111,8 @@ const WeatherTracker = () => {
       } else if (coords) {
         weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${coords.lat}&lon=${coords.lon}&units=${unit}&appid=${API_KEY}`;
       } else if (city) {
+        // reset coords when searching by city
+        setCoords(null);
         weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${unit}&appid=${API_KEY}`;
       } else {
         return;
@@ -127,8 +130,10 @@ const WeatherTracker = () => {
       setWeather(weatherData);
       setForecast(forecastData);
 
-      // Save coordinates for future use
-      setCoords(weatherData.coord);
+      // Save coordinates only if from geolocation
+      if (lat && lon) {
+        setCoords(weatherData.coord);
+      }
 
       // Save recent searches
       if (city && !recentSearches.includes(city)) {
@@ -177,7 +182,10 @@ const WeatherTracker = () => {
             />
             <button
               className="search-btn"
-              onClick={() => fetchWeather()}
+              onClick={() => {
+                setCoords(null); // reset coords before city search
+                fetchWeather();
+              }}
               disabled={loading}
             >
               {loading ? (
@@ -284,6 +292,7 @@ const WeatherTracker = () => {
                   className="recent-tag"
                   onClick={() => {
                     setCity(search);
+                    setCoords(null); // reset coords for new search
                     fetchWeather();
                   }}
                 >
