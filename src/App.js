@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import Navigation from "./components/Navigation/Navigation";
 import HomeSection from "./components/HomeSection/Home";
 import AchievementsSection from "./components/AchievementSection/Achievement";
@@ -46,18 +48,28 @@ function App() {
   }, []);
 
   return (
-    <div className="background">
-      <Navigation activeSection={activeSection} />
-      
-      <ChatOverlay /> 
-
-      <HomeSection activeSection={activeSection} />
-      <ProjectsSection />
-      <AchievementsSection />
-      <ContactSection />
-      <WeatherTracker/>
-      <FooterSection />
-    </div>
+    <Router>
+      <div className="background">
+        <Routes>
+          {/* Main page */}
+          <Route path="/" element={
+            <>
+              <Navigation activeSection={activeSection} />
+              <ChatOverlay /> 
+              <HomeSection activeSection={activeSection} />
+              <ProjectsSection />
+              <AchievementsSection />
+              <ContactSection />
+              <FooterSection />
+            </>
+          } />
+          
+          {/* Weather page */}
+          
+          <Route path="/weather" element={<WeatherTracker />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
