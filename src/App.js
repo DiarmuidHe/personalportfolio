@@ -57,8 +57,8 @@ function App() {
               <Navigation activeSection={activeSection} />
               <ChatOverlay /> 
               <HomeSection activeSection={activeSection} />
-              <ProjectsSection />
               <AchievementsSection />
+              <ProjectsSection />
               <ContactSection />
               <FooterSection />
             </>

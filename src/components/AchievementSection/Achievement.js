@@ -23,19 +23,31 @@ const AchievementsSection = () => {
   
 
   return (
-    <Element name="achievements" id="achievements">
-      <main style={{ minHeight: '100vh', paddingTop: '70px', overflowX: "hidden" }}>
-        <div className="container" style={{ position: "relative" }}>
-          {/* Title with animation */}
-          <motion.div
-            ref={ref}
-            initial={{ x: -200, opacity: 0 }}
-            animate={isInView ? { x: 0, opacity: 1 } : { x: -200, opacity: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="fw-bold page-title">Achievements</h1>
-          </motion.div>
-
+    // <Element name="achievements" id="achievements">
+    //   <main style={{ minHeight: '100vh', paddingTop: '70px', overflowX: "hidden" }}>
+    //     <div className="container" style={{ position: "relative" }}>
+    //       {/* Title with animation */}
+    //       <motion.div
+    //         ref={ref}
+    //         initial={{ x: -200, opacity: 0 }}
+    //         animate={isInView ? { x: 0, opacity: 1 } : { x: -200, opacity: 0 }}
+    //         transition={{ duration: 0.8 }}
+    //       >
+    //         <h1 className="fw-bold page-title">Achievements</h1>
+    //       </motion.div>
+    <Element name="projects" id="projects">
+      <main style={{ paddingTop: '70px', overflowX: "hidden" }}>
+        
+          <div className="container" style={{ position: "relative" }}>
+            
+            <motion.div
+              ref={ref}
+              initial={{ x: -200, opacity: 0 }}
+              animate={isInView ? { x: 0, opacity: 1 } : { x: -200, opacity: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h1 className="fw-bold page-title">Projects</h1>
+            </motion.div>
           <Swiper
             loop={true} 
             effect="coverflow"
@@ -55,7 +67,7 @@ const AchievementsSection = () => {
             breakpoints={{
                 0: { slidesPerView: 1.2, spaceBetween: 10 },
                 640: { slidesPerView: 2, spaceBetween: 20 },
-                1024: { slidesPerView: 3, spaceBetween: 30 }
+                1024: { slidesPerView: 4, spaceBetween: 10 }
             }}
             navigation={{
               nextEl: ".swiper-button-next",
