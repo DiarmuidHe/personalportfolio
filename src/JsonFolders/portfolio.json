@@ -1,58 +1,62 @@
 {
     "images":
     {
-        "profile":"https://portfoliodh.s3.eu-west-1.amazonaws.com/profile_imgs/ProfileIMG.png",
-        "logo":"https://portfoliodh.s3.eu-west-1.amazonaws.com/profile_imgs/logo.png",
+        "profile":"https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/profile_imgs/ProfileIMG.png",
+        "logo":"https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/profile_imgs/logo.png",
         
         "languages":[
-        
           {
-            "src": "https://portfoliodh.s3.eu-west-1.amazonaws.com/images/angular.jpg",
+            "src": "https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/images/GitHub.png",
+            "alt": "GitHub",
+            "link": "https://github.com/DiarmuidHe"
+          },
+          {
+            "src": "https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/images/angular.jpg",
             "alt": "Angular",
             "link": "https://angular.dev/"
           },
           {
-            "src": "https://portfoliodh.s3.eu-west-1.amazonaws.com/images/aws.png",
+            "src": "https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/images/aws.png",
             "alt": "AWS",
             "link": "https://aws.amazon.com/free/?trk=a33bc586-5fff-4997-915b-54cf807d2a49&sc_channel=ps&ef_id=CjwKCAjwkbzEBhAVEiwA4V-yqpmqXMrpAeBtLzAftO5FoROkYoYUSiyHTokj9Cd-KnjohD8rMt0tmxoCtnIQAvD_BwE:G:s&s_kwcid=AL!4422!3!433803620858!e!!g!!aws!1680401428!67152600164&gad_campaignid=1680401428&gbraid=0AAAAADjHtp8QVEzZQjAFApSj2rhAXQWiR&gclid=CjwKCAjwkbzEBhAVEiwA4V-yqpmqXMrpAeBtLzAftO5FoROkYoYUSiyHTokj9Cd-KnjohD8rMt0tmxoCtnIQAvD_BwE"
           },
           {
-            "src": "https://portfoliodh.s3.eu-west-1.amazonaws.com/images/bootstrap.png",
+            "src": "https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/images/bootstrap.png",
             "alt": "Bootstrap",
             "link": "https://getbootstrap.com/"
           },
           {
-            "src": "https://portfoliodh.s3.eu-west-1.amazonaws.com/images/c.png",
+            "src": "https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/images/c.png",
             "alt": "C Language",
             "link": "https://learn.microsoft.com/en-us/dotnet/csharp/"
           },
           {
-            "src": "https://portfoliodh.s3.eu-west-1.amazonaws.com/images/html.png",
+            "src": "https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/images/html.png",
             "alt": "HTML5",
             "link": "https://www.w3schools.com/html/"
           },
           {
-            "src": "https://portfoliodh.s3.eu-west-1.amazonaws.com/images/js.png",
+            "src": "https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/images/js.png",
             "alt": "JavaScript",
             "link": "https://www.w3schools.com/js/"
           },
           {
-            "src": "https://portfoliodh.s3.eu-west-1.amazonaws.com/images/node.png",
+            "src": "https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/images/node.png",
             "alt": "Node.js",
             "link": "https://nodejs.org/en"
           },
           {
-            "src": "https://portfoliodh.s3.eu-west-1.amazonaws.com/images/python.png",
+            "src": "https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/images/python.png",
             "alt": "Python",
             "link": "https://www.python.org/"
           },
           {
-            "src": "https://portfoliodh.s3.eu-west-1.amazonaws.com/images/react.png",
+            "src": "https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/images/react.png",
             "alt": "React",
             "link": "https://react.dev/"
           },
           {
-            "src": "https://portfoliodh.s3.eu-west-1.amazonaws.com/images/SQL.png",
+            "src": "https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/images/SQL.png",
             "alt": "SQL",
             "link": "https://www.w3schools.com/sql/"
           }
@@ -62,24 +66,38 @@
         ],
         "projects":[
           {
-            "src": "https://portfoliodh.s3.eu-west-1.amazonaws.com/project_imgs/personal_portfolio.png",
+            "src": "https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/project_imgs/personal_portfolio.png",
             "alt": "Personal Portfolio",
             "link": "https://diarmuid.dev/",
             "title": "My Portfolio",
             "description":"Built with React, Bootstrap, and AWS. A responsive, fast-loading site showcasing my skills and projects with cloud-hosted deployment and modern UI design."
           },
           {
-            "src": "https://portfoliodh.s3.eu-west-1.amazonaws.com/project_imgs/chat_image.png",
+            "src": "https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/project_imgs/chat_image.png",
             "alt": "Chat Bot",
             "link": "#",
             "title": "Chat Bot",
             "description":"Powered by Amazon Lex for smart, natural conversations. Handles custom intents, supports voice/text, and integrates with AWS for a seamless user experience."
+          },
+          {
+            "src": "https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/project_imgs/weather-pulse.png",
+            "alt": "Weather Pulse",
+            "link": "https://diarmuid.dev/weather",
+            "title": "Weather Pulse",
+            "description":"This is a w"
+          },
+          {
+            "src": "https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/project_imgs/wear-more.png",
+            "alt": "Wear More",
+            "link": "https://diarmuidhe.github.io/WearMore/index.html",
+            "title": "Weather Pulse",
+            "description":"This is a w"
           }
         ],
 
         "buttons":{
-            "chat_stars":"https://portfoliodh.s3.eu-west-1.amazonaws.com/btn_images/chatStars.png",
-            "send":"https://portfoliodh.s3.eu-west-1.amazonaws.com/btn_images/send.png"
+            "chat_stars":"https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/btn_images/chatStars.png",
+            "send":"https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/btn_images/send.png"
         }
     }
 }
