@@ -1,13 +1,44 @@
-.project-image{
-    height:13em;
-    width: 100%;
+.project-image {
+  width: 100%;
+  height: clamp(10em, 25vw, 15em); /* scales with screen size */
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
 
-}
 .card {
-  height: 28em;
-  overflow: hidden;
+  height: clamp(20em, 60vw, 28em); /* flexible height */
+  overflow: hidden; 
+  border-radius: 1rem;
+  border-color: #07376a;
 }
+
+.card-title {
+  font-size: clamp(1rem, 2vw, 1.5rem); /* scales from mobile → desktop */
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
+  line-height: 1.4;
+}
+
 a {
   text-decoration: none;
-  color: inherit; /* or set your custom color */
+  color: inherit;
+}
+
+/* Extra Responsive Tweaks */
+@media (max-width: 576px) {
+  .project-image {
+    height: 10em;
+  }
+  .card {
+    height: auto; /* let it expand naturally on small screens */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .project-image {
+    height: 12em;
+  }
 }

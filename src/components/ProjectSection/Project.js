@@ -18,18 +18,6 @@ const ProjectsSection = () => {
   return (
     <Element>
       <main>
-            
-            {/* <motion.div
-              ref={ref}
-              initial={{ x: -200, opacity: 0 }}
-              animate={isInView ? { x: 0, opacity: 1 } : { x: -200, opacity: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <h1 className="fw-bold page-title">Projects</h1>
-            </motion.div> */}
-
-
-
         <div className="container">
           <div className="row">
             {images.projects.map((proj, item) => (
