@@ -1,6 +1,8 @@
 // components/ChatSection/Chat.js
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import data from "../../JsonFolders/portfolio.json";
+import "./Chat.css";
 
 export default function ChatOverlay() {
   const images = data.images;
@@ -15,15 +17,16 @@ export default function ChatOverlay() {
 
   async function ask(e) {
     e.preventDefault();
+    if (!prompt.trim()) return;
     setLoading(true);
     setError("");
     setAnswer("");
     try {
-        const res = await fetch("/.netlify/functions/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ prompt }),
-        });
+      const res = await fetch("/.netlify/functions/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt }),
+      });
 
       const data = await res.json();
       if (!res.ok) throw new Error(data?.error || "Request failed");
@@ -35,71 +38,105 @@ export default function ChatOverlay() {
     }
   }
 
+  const samplePrompts = [
+    "Tell me about your projects",
+    "What skills do you have?",
+    "What hobbies do you enjoy?",
+    "Who built this site?",
+  ];
+
   return (
     <>
-      {/* Chat Toggle Button */}
-      <button
+      {/* Floating Chat Button */}
+      <motion.button
         onClick={toggleChat}
-        className="position-fixed bottom-0 end-0 p-3 btn btn-primary rounded-5 me-2 mb-2 d-flex align-items-center gap-2 z-50"
+        className="chat-toggle-btn"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
       >
-        Chat
         <img
           src={images.buttons.chat_stars}
-          className="chatBtn"
           alt="chat icon"
-          style={{ width: "24px", height: "24px" }}
+          className="chat-toggle-icon"
         />
-      </button>
+      </motion.button>
 
-      {/* Full Screen Overlay Chat */}
-      {isChatOpen && (
-        <div
-          className="position-fixed top-0 start-0 w-100 h-100 bg-white d-flex justify-content-center align-items-center"
-          style={{ zIndex: 1040 }}
-        >
-          <div
-            className="border rounded-4 shadow-lg p-4 bg-white"
-            style={{ width: "90%", maxWidth: "500px" }}
+      {/* Chat Overlay */}
+      <AnimatePresence>
+        {isChatOpen && (
+          <motion.div
+            className="chat-overlay"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            transition={{ duration: 0.3 }}
           >
-            <h2 className="mb-3">Chat Support</h2>
+            <div className="chat-container">
+              {/* Header */}
+              <div className="chat-header">
+                <h5>Chat Assistant</h5>
+                <button onClick={toggleChat} className="chat-close-btn">
+                  ✕
+                </button>
+              </div>
 
-            {/* Mini Chat Form */}
-            <form onSubmit={ask}>
-              <textarea
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
-                rows={4}
-                className="form-control mb-2"
-                placeholder="Type your question..."
-              />
-              <button
-                type="submit"
-                className="btn btn-primary w-100"
-                disabled={loading || !prompt.trim()}
-              >
-                {loading ? "Thinking..." : "Ask"}
-              </button>
-            </form>
+              {/* Messages */}
+              <div className="chat-messages">
+                {!answer && !error && !loading && (
+                  <div className="chat-welcome">
+                    👋 Hi! You can ask me questions about Alex Doe.
+                    <div className="chat-prompts">
+                      {samplePrompts.map((sp, idx) => (
+                        <motion.button
+                          key={idx}
+                          className="chat-prompt-btn"
+                          onClick={() => setPrompt(sp)}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          {sp}
+                        </motion.button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {loading && <p className="chat-loading">⏳ Thinking...</p>}
+                {error && <p className="chat-error">{error}</p>}
+                <AnimatePresence>
+                  {answer && (
+                    <motion.div
+                      className="chat-answer"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                    >
+                      {answer}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
 
-            {error && <p className="text-danger mt-2">{error}</p>}
-            {answer && (
-              <pre
-                className="mt-3 p-2 bg-light border rounded"
-                style={{ whiteSpace: "pre-wrap" }}
-              >
-                {answer}
-              </pre>
-            )}
-
-            <button
-              onClick={toggleChat}
-              className="btn btn-danger w-100 mt-3"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
+              {/* Input */}
+              <form onSubmit={ask} className="chat-form">
+                <textarea
+                  value={prompt}
+                  onChange={(e) => setPrompt(e.target.value)}
+                  rows={1}
+                  className="chat-input"
+                  placeholder="Ask me anything..."
+                />
+                <button
+                  type="submit"
+                  className="chat-send-btn"
+                  disabled={loading || !prompt.trim()}
+                >
+                  Send
+                </button>
+              </form>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
