@@ -19,11 +19,12 @@ export default function ChatOverlay() {
     setError("");
     setAnswer("");
     try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt }),
-      });
+        const res = await fetch("/.netlify/functions/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt }),
+        });
+
       const data = await res.json();
       if (!res.ok) throw new Error(data?.error || "Request failed");
       setAnswer(data.text);

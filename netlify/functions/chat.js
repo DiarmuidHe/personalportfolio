@@ -1,5 +1,5 @@
 // netlify/functions/chat.js
-export async function handler(event) {
+exports.handler = async function (event) {
   try {
     const { prompt } = JSON.parse(event.body || "{}");
 
@@ -7,21 +7,21 @@ export async function handler(event) {
       return { statusCode: 500, body: JSON.stringify({ error: "Missing OPENAI_API_KEY" }) };
     }
 
-    // Minimal REST call to Chat Completions (cheap & simple)
     const resp = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: [
-          { role: "system", content: "You are a concise, helpful assistant." },
-          { role: "user", content: prompt || "" }
-        ],
-        temperature: 0.3
-      })
+    body: JSON.stringify({
+      model: "gpt-4o-mini",
+      messages: [
+        { role: "system", content: "You are a helpful assistant who knows the following about the site owner: - Name: Diarmuid Hession - Role: Software developer specializing in React and Tailwind - Projects: Built a portfolio site, and a weather app - Hobbies: Traveling, programing, and gaming. Answer questions as if you are Diarmuids assistant." },
+        { role: "user", content: prompt || "" }
+      ],
+      temperature: 0.3
+    })
+
     });
 
     if (!resp.ok) {
@@ -39,4 +39,4 @@ export async function handler(event) {
   } catch (e) {
     return { statusCode: 500, body: JSON.stringify({ error: String(e) }) };
   }
-}
+};
