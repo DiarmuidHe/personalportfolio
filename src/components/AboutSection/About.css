@@ -1,0 +1,54 @@
+/* About.css */
+
+/* Main title */
+/* .about-title {
+  font-size: 3rem;
+  letter-spacing: -1px;
+  color: #111;
+} */
+
+@media (min-width: 768px) {
+  .about-title {
+    font-size: 3.5rem;
+  }
+}
+
+/* Subtitle */
+/* .about-subtitle {
+  font-size: 2rem;
+  color: #222;
+} */
+
+/* Paragraph text */
+.about-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Highlighted words */
+.highlight {
+  font-weight: 600;
+  color: #000;
+}
+
+/* Personal hobby note */
+.personal-note {
+  font-style: italic;
+  color: #333;
+}
+
+/* Slider section */
+.about-slider {
+  margin-top: 2rem;
+}
+
+.slider-title {
+  font-size: 1.5rem;
+  color: #07376a;
+
+  position: relative;
+}
+

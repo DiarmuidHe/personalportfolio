@@ -7,7 +7,7 @@
   height: 60px;
   border: none;
   border-radius: 50%;
-  background-color: #0d6efd;
+  background-color: #07376a;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   display: flex;
   justify-content: center;
@@ -44,7 +44,7 @@
 
 /* Header */
 .chat-header {
-  background: #0d6efd;
+  background: #07376a;
   color: white;
   padding: 0.75rem 1rem;
   border-top-left-radius: 1rem;
@@ -86,9 +86,9 @@
 }
 
 .chat-prompt-btn {
-  border: 1px solid #0d6efd;
+  border: 1px solid #07376a;
   background: white;
-  color: #0d6efd;
+  color: #07376a;
   padding: 0.25rem 0.5rem;
   border-radius: 999px;
   font-size: 0.8rem;
@@ -97,7 +97,7 @@
 }
 
 .chat-prompt-btn:hover {
-  background: #0d6efd;
+  background: #07376a;
   color: white;
 }
 
@@ -138,7 +138,7 @@
 }
 
 .chat-send-btn {
-  background: #0d6efd;
+  background: #07376a;
   color: white;
   border: none;
   border-radius: 0.5rem;

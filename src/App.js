@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation/Navigation";
 import HomeSection from "./components/HomeSection/Home";
 import AchievementsSection from "./components/AchievementSection/Achievement";
+import AboutSection from "./components/AboutSection/About";
 import ProjectsSection from "./components/ProjectSection/Project";
 import ContactSection from "./components/ContactSection/Contact";
 import FooterSection from "./components/FooterSection/footer";
@@ -24,7 +25,7 @@ function App() {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 100;
 
-      const sections = ['Home', 'projects', 'achievements', 'contact'].map(section => {
+      const sections = ['Home','about', 'projects', 'contact'].map(section => {
         const element = document.getElementById(section);
         return {
           id: section,
@@ -57,7 +58,8 @@ function App() {
               <Navigation activeSection={activeSection} />
               <ChatOverlay /> 
               <HomeSection activeSection={activeSection} />
-              <AchievementsSection />
+              <AboutSection/>
+              <AchievementsSection/>
               <ProjectsSection />
               <ContactSection />
               <FooterSection />

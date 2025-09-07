@@ -13,7 +13,7 @@ const HomeSection = ({ activeSection }) => {
   console.log("Is in view:", isInView); // Debug line
 
   return (
-    <div style={{ height: '90vh', overflow:'hidden' }}>
+    <div style={{ height: '100vh', overflow:'hidden' }}>
       <Element name="Home" id="Home">
         
         <main className="d-flex flex-column justify-content-center align-items-center" style={{  

@@ -16,9 +16,19 @@ const ProjectsSection = () => {
   const images = data.images;
 
   return (
-    <Element>
-      <main>
-        <div className="container">
+    <Element name="projects" id="projects">
+      <main style={{ paddingTop: '70px', overflowX: "hidden" }}>
+        
+          <div className="container" style={{ position: "relative" }}>
+            
+            <motion.div
+              ref={ref}
+              initial={{ x: -200, opacity: 0 }}
+              animate={isInView ? { x: 0, opacity: 1 } : { x: -200, opacity: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h1 className="fw-bold page-title">Projects</h1>
+            </motion.div>
           <div className="row">
             {images.projects.map((proj, item) => (
               <div key={item} className="col-6 col-md-4 col-lg-3 mb-4">

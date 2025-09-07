@@ -47,6 +47,18 @@ const Navigation = ({ activeSection }) => {
               </li>
               <li className="nav-item">
                 <Link 
+                  to="about" 
+                  smooth={true} 
+                  duration={250} 
+                  className={`nav-link ${activeSection === 'about' ? 'active fw-bold' : ''}`}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => document.getElementById('navbarNav').classList.remove('show')}
+                >
+                  About
+                </Link>
+                </li>
+              <li className="nav-item">
+                <Link 
                   to="projects" 
                   smooth={true} 
                   duration={250} 

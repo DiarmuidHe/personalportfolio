@@ -84,7 +84,7 @@ export default function ChatOverlay() {
               <div className="chat-messages">
                 {!answer && !error && !loading && (
                   <div className="chat-welcome">
-                    👋 Hi! You can ask me questions about Alex Doe.
+                    👋 Hi! You can ask me questions about Diarmuid Hession.
                     <div className="chat-prompts">
                       {samplePrompts.map((sp, idx) => (
                         <motion.button
@@ -100,7 +100,7 @@ export default function ChatOverlay() {
                     </div>
                   </div>
                 )}
-                {loading && <p className="chat-loading">⏳ Thinking...</p>}
+                {loading && <p className="chat-loading">Thinking...</p>}
                 {error && <p className="chat-error">{error}</p>}
                 <AnimatePresence>
                   {answer && (
