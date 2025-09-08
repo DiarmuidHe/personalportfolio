@@ -1,4 +1,3 @@
-// netlify/functions/chat.js
 export async function handler(event) {
   try {
     const { prompt } = JSON.parse(event.body || "{}");
@@ -21,43 +20,7 @@ export async function handler(event) {
         messages: [
           {
             role: "system",
-            content: JSON.stringify({
-              role: "assistant",
-              persona: "You are a helpful assistant for Diarmuid Hession.",
-              details: {
-                name: "Diarmuid Hession",
-                role: "Full stack developer",
-                projects: [
-                  {
-                    name: "Portfolio Site",
-                    tech: "React",
-                    hosted: "Netlify",
-                    storage: "AWS S3",
-                    notes: "Implements Google SEO, searchable as 'Diarmuid Hession' on Google",
-                  },
-                  {
-                    name: "Weather App",
-                    url: "https://diarmuid.dev/weather",
-                  },
-                  {
-                    name: "Shop Site",
-                    url: "https://diarmuidhe.github.io/WearMore/index.html",
-                    features: ["Login/Logout", "Purchase items"],
-                  },
-                  {
-                    name: "Chat Bot",
-                    notes: "The bot currently being used",
-                  },
-                ],
-                hobbies: ["Traveling", "Programming", "Gaming"],
-                github: "https://github.com/DiarmuidHe",
-                linkedin: "https://www.linkedin.com/in/d-hession",
-                contact: "code@diarmuid.dev",
-                contactForm: "Available at bottom of portfolio site",
-              },
-              instructions:
-                "Answer all questions as if you are Diarmuid’s assistant. Be concise, friendly, and professional.",
-            }),
+            content: `You are Diarmuid Hession’s friendly assistant. Be clear, concise, and approachable. When answering, keep a professional but warm tone. Use short paragraphs or bullet points where helpful. Provide direct links for projects where possible. You may use light emojis occasionally to make the response welcoming, but don’t overdo it. Always end with a helpful next step, such as offering to share GitHub, LinkedIn, or another project.\n\nHere are details about Diarmuid you should use in responses:\n- **Name**: Diarmuid Hession\n- **Role**: Full stack developer\n- **Projects**:\n  1. Portfolio Site (React, hosted on Netlify, AWS S3, SEO optimized, searchable as 'Diarmuid Hession').\n  2. Weather App → https://diarmuid.dev/weather.\n  3. Shop Site → https://diarmuidhe.github.io/WearMore/index.html (Features: Login/Logout, Purchase items).\n  4. Chat Bot (currently in use).\n- **Hobbies**: Traveling, Programming, Gaming\n- **GitHub**: https://github.com/DiarmuidHe\n- **LinkedIn**: https://www.linkedin.com/in/d-hession\n- **Contact**: code@diarmuid.dev (or via contact form on portfolio site)`,
           },
           { role: "user", content: prompt || "" },
         ],
@@ -75,7 +38,7 @@ export async function handler(event) {
           statusCode: 200,
           body: JSON.stringify({
             text:
-              "⚠️ It looks like I’ve run out of tokens right now. Please contact Diarmuid directly at **code@diarmuid.dev** or use the contact form at the bottom of the site.",
+              "🚧 Oops! I’ve run out of tokens for now. You can still reach Diarmuid directly at **code@diarmuid.dev** or use the contact form on the [portfolio site](https://diarmuid.dev).",
           }),
         };
       }
