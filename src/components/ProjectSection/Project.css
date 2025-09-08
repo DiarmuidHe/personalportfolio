@@ -3,6 +3,7 @@
   height: clamp(10em, 25vw, 15em); /* scales with screen size */
   object-fit: cover;
   border-radius: 0.5rem;
+  background-color: #07376a;
 }
 
 .card {
@@ -13,6 +14,7 @@
 }
 
 .card-title {
+  color:#07376a;
   font-size: clamp(1rem, 2vw, 1.5rem); /* scales from mobile → desktop */
   font-weight: bold;
 }

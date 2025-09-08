@@ -73,25 +73,39 @@
             "description":"Built with React, Bootstrap, and AWS. A responsive, fast-loading site showcasing my skills and projects with cloud-hosted deployment and modern UI design."
           },
           {
-            "src": "https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/project_imgs/chat_image.png",
+            "src": "https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/btn_images/chatStars.png",
             "alt": "Chat Bot",
             "link": "#",
             "title": "Chat Bot",
-            "description":"Powered by Amazon Lex for smart, natural conversations. Handles custom intents, supports voice/text, and integrates with AWS for a seamless user experience."
+            "description":"A friendly AI assistant built with Node.js and OpenAI’s GPT model, designed to answer questions, showcase my projects, and provide quick links to my GitHub, LinkedIn, and portfolio."
+          },
+          {
+            "src": "https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/project_imgs/gameplatformWPF.png",
+            "alt": "C# Game Platform",
+            "link": "https://github.com/DiarmuidHe/GamePlatform",
+            "title": "C# Game Platform",
+            "description":"A desktop app built with C#, XAML, and .NET, featuring login authentication, a local database with LINQ, and integration with the IGDB API to let users browse, purchase, and manage their game library."
           },
           {
             "src": "https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/project_imgs/weather-pulse.png",
             "alt": "Weather Pulse",
             "link": "https://diarmuid.dev/weather",
             "title": "Weather Pulse",
-            "description":"This is a w"
+            "description":"A responsive React app that uses the OpenWeather API to deliver real-time forecasts, geolocation-based weather, and interactive features like recent searches and unit toggling."
           },
           {
             "src": "https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/project_imgs/wear-more.png",
             "alt": "Wear More",
             "link": "https://diarmuidhe.github.io/WearMore/index.html",
-            "title": "Weather Pulse",
-            "description":"This is a weather app that can tell the weather"
+            "title": "WearMore",
+            "description":"An e-commerce like web app built with Bootstrap, featuring login/logout authentication and a shopping system where users can browse and purchase items. Hosted on github."
+          },
+          {
+            "src": "https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/project_imgs/gameplatformAngular.png",
+            "alt": "Angular Game Platform",
+            "link": "https://github.com/DiarmuidHe/GamePlatformWebsite",
+            "title": "Angular Game Platform",
+            "description":"An interactive Angular web app with Swiper.js integration, allowing users to browse and add their favorite games to a personalized list."
           }
         ],
 
