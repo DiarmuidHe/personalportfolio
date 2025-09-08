@@ -1,55 +1,63 @@
 "use client";
 import { Element } from "react-scroll";
-import { useRef } from "react";
-import { useInView } from "framer-motion";
-import React, { useState } from 'react';
-import { motion } from "framer-motion";
-import emailjs from '@emailjs/browser';
-import data from "../../JsonFolders/portfolio.json"
+import { useRef, useState } from "react";
+import { useInView, motion, AnimatePresence } from "framer-motion";
+import emailjs from "@emailjs/browser";
+import data from "../../JsonFolders/portfolio.json";
 
-import './Contact.css'
-  
+import "./Contact.css";
+
 const ContactSection = () => {
-  const images = data.images
+  const images = data.images;
 
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
+    name: "",
+    email: "",
+    message: "",
   });
 
-  const handleChange = e => {
+  const [notification, setNotification] = useState(null);
+
+  const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-const handleSubmit = (e) => {
-  e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  emailjs.send(
-    'service_PortfolioWebsite',
-    'template_yi90298',
-    formData,
-    'Xve_WZi_W9ZM1YQXP'
-  )
-  .then((result) => {
-      console.log('Email sent:', result.text);
-      alert('Message sent successfully!');
-      setFormData({ name: '', email: '', message: '' });
-  })
-  .catch((error) => {
-      console.error('Email error:', error);
-      alert('Failed to send message. Please try again.');
-  });
-};
+    emailjs
+      .send(
+        "service_PortfolioWebsite",
+        "template_yi90298",
+        formData,
+        "Xve_WZi_W9ZM1YQXP"
+      )
+      .then((result) => {
+        console.log("Email sent:", result.text);
+        setNotification({ type: "success", message: "Message sent successfully!" });
+        setFormData({ name: "", email: "", message: "" });
+      })
+      .catch((error) => {
+        console.error("Email error:", error);
+        setNotification({
+          type: "error",
+          message: "Failed to send message. Please try again.",
+        });
+      });
+
+    // Auto-hide after 4s
+    setTimeout(() => setNotification(null), 4000);
+  };
+
   const ref = useRef(null);
   const isInView = useInView(ref, { margin: "-100px", once: false });
 
   return (
     <Element name="contact" id="contact">
       <main style={{ overflowX: "hidden" }}>
-        <div style={{ minHeight: "70vh", paddingTop: "70px"  ,position: "relative"}}>
+        <div style={{ minHeight: "70vh", paddingTop: "70px", position: "relative" }}>
           <div className="container">
-            
+            {/* Title Animation */}
             <motion.div
               ref={ref}
               initial={{ x: -200, opacity: 0 }}
@@ -58,16 +66,20 @@ const handleSubmit = (e) => {
             >
               <h1 className="fw-bold page-title">Contact</h1>
             </motion.div>
+
+            {/* Form */}
             <motion.div
-              className=" mt-5"
+              className="mt-5"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: 'easeOut' }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
             >
               <form onSubmit={handleSubmit} className="mx-auto">
                 <div className="mb-3">
-                  <label htmlFor="name" className="form-label">Name</label>
-                  <input 
+                  <label htmlFor="name" className="form-label">
+                    Name
+                  </label>
+                  <input
                     type="text"
                     className="form-control rounded-4"
                     id="name"
@@ -79,8 +91,10 @@ const handleSubmit = (e) => {
                 </div>
 
                 <div className="mb-3">
-                  <label htmlFor="email" className="form-label">Email</label>
-                  <input 
+                  <label htmlFor="email" className="form-label">
+                    Email
+                  </label>
+                  <input
                     type="email"
                     className="form-control rounded-4"
                     id="email"
@@ -92,8 +106,10 @@ const handleSubmit = (e) => {
                 </div>
 
                 <div className="mb-3">
-                  <label htmlFor="message" className="form-label">Message</label>
-                  <textarea 
+                  <label htmlFor="message" className="form-label">
+                    Message
+                  </label>
+                  <textarea
                     className="form-control rounded-4"
                     id="message"
                     name="message"
@@ -110,13 +126,38 @@ const handleSubmit = (e) => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <img className="me-2" src={images.buttons.send} height="25em" alt="simple aeroplane send icon"/>
+                  <img
+                    className="me-2"
+                    src={images.buttons.send}
+                    height="25em"
+                    alt="simple aeroplane send icon"
+                  />
                   Send
                 </motion.button>
               </form>
             </motion.div>
 
-
+            {/* Notification Toast */}
+            <AnimatePresence>
+              {notification && (
+                <motion.div
+                  key="toast"
+                  initial={{ y: -50, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -50, opacity: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className={`toast-message ${notification.type}`}
+                >
+                  <span>{notification.message}</span>
+                  <button
+                    className="toast-close"
+                    onClick={() => setNotification(null)}
+                  >
+                    ×
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </main>
@@ -125,6 +166,3 @@ const handleSubmit = (e) => {
 };
 
 export default ContactSection;
-
-
-
