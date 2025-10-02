@@ -14,7 +14,8 @@ import AboutSection from "./components/AboutSection/About";
 import ProjectsSection from "./components/ProjectSection/Project";
 import ContactSection from "./components/ContactSection/Contact";
 import FooterSection from "./components/FooterSection/footer";
-import ChatOverlay from "./components/ChatSection/Chat";
+import ChatOverlay from "./components/ChatSection/Chat";   // floating chat
+import FullPageChat from "./components/FullPageChatSection/FullPageChat";// full page chat
 import WeatherTracker from "./components/WeatherTracker/Weather";
 import './App.css';
 
@@ -67,8 +68,10 @@ function App() {
           } />
           
           {/* Weather page */}
-          
           <Route path="/weather" element={<WeatherTracker />} />
+
+          {/* Full Page Chat page */}
+          <Route path="/chat" element={<FullPageChat />} />
         </Routes>
       </div>
     </Router>
