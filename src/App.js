@@ -17,6 +17,7 @@ import FooterSection from "./components/FooterSection/footer";
 import ChatOverlay from "./components/ChatSection/Chat";   // floating chat
 import FullPageChat from "./components/FullPageChatSection/FullPageChat";// full page chat
 import WeatherTracker from "./components/WeatherTracker/Weather";
+import CVPage from "./components/CVPage/CVPage";
 import './App.css';
 
 function App() {
@@ -72,6 +73,9 @@ function App() {
 
           {/* Full Page Chat page */}
           <Route path="/chat" element={<FullPageChat />} />
+
+          {/* CV page */}
+          <Route path="/cv" element={<CVPage />} />
         </Routes>
       </div>
     </Router>
