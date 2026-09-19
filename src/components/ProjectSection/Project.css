@@ -124,10 +124,6 @@
   transform: translateX(5px);
 }
 
-.project-link-private {
-  cursor: default;
-}
-
 .project-highlight {
   font-size: 0.95rem;
   line-height: 1.5;
@@ -135,10 +131,211 @@
   margin-bottom: 0.5rem;
 }
 
+.project-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+}
+
 .project-cta-muted {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
   color: var(--text-muted);
 }
 
-.project-card:hover .project-cta-muted svg {
-  transform: none;
+.projects-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+/* ---------- Project dialog ---------- */
+.pd-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2200; /* above the chat overlay, so the chat can open a project */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(4, 24, 46, 0.6);
+}
+
+.pd-panel {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  max-height: calc(100vh - 3rem);
+  max-height: calc(100dvh - 3rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+.pd-media {
+  aspect-ratio: 16 / 8;
+}
+
+.pd-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: #fff;
+  color: var(--brand);
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+}
+
+.pd-close:hover {
+  background: var(--brand);
+  color: #fff;
+}
+
+.pd-body {
+  padding: 1.75rem 2rem 1.5rem;
+}
+
+.pd-title {
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--brand);
+  margin: 0 0 0.5rem;
+}
+
+.pd-highlight {
+  font-weight: 600;
+  color: var(--brand);
+  margin-bottom: 0.75rem;
+}
+
+.pd-summary {
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.pd-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+}
+
+.pd-notes {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.pd-notes-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.pd-notes p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 0.9rem;
+}
+
+.pd-notes strong {
+  color: var(--brand);
+}
+
+.pd-pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 2rem 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.pd-pager-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: 48%;
+  border: none;
+  background: none;
+  padding: 0.5rem 0;
+  text-align: left;
+  color: var(--brand);
+  cursor: pointer;
+}
+
+.pd-pager-next {
+  margin-left: auto;
+  text-align: right;
+}
+
+.pd-pager-btn svg {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.pd-pager-btn:hover svg {
+  transform: translateX(-3px);
+}
+
+.pd-pager-next:hover svg {
+  transform: translateX(3px);
+}
+
+.pd-pager-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.pd-pager-name {
+  display: block;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+/* Phones: the dialog becomes a full-height sheet */
+@media (max-width: 575.98px) {
+  .pd-backdrop {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .pd-panel {
+    max-height: 100vh;
+    max-height: 100dvh;
+    height: 100%;
+    border-radius: 0;
+  }
+
+  .pd-body {
+    padding: 1.25rem 1.25rem 1rem;
+  }
+
+  .pd-pager {
+    padding: 0.75rem 1.25rem 1.25rem;
+  }
 }

@@ -75,8 +75,8 @@ const ANSWERS = {
 
   projects: () =>
     `Some of the things Diarmuid has built:\n\n${PROJECTS.map(
-      (p) => `- **${p.link ? `[${p.title}](${p.link})` : p.title}**: ${firstSentence(p.description)}`
-    ).join("\n")}\n\nThere's more on his [GitHub](${PROFILE.links.github}).`,
+      (p) => `- **${p.slug ? `[${p.title}](/projects/${p.slug})` : p.title}**: ${firstSentence(p.description)}`
+    ).join("\n")}\n\nPick one to open its write-up.There's more on his [GitHub](${PROFILE.links.github}).`,
 
   skills: () =>
     `${Object.entries(PROFILE.skills)

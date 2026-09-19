@@ -1,5 +1,6 @@
 // components/ChatSection/Chat.js
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaTimes, FaExpandAlt, FaCommentDots } from "react-icons/fa";
 import ChatPanel from "./ChatPanel";
@@ -113,9 +114,9 @@ export default function ChatOverlay() {
               onNavigate={onNavigate}
               headerActions={
                 <>
-                  <a href="/chat" className="chat-icon-btn" aria-label="Open chat in full page" title="Full screen">
+                  <Link to="/chat" className="chat-icon-btn" aria-label="Open chat in full page" title="Full screen">
                     <FaExpandAlt aria-hidden="true" />
-                  </a>
+                  </Link>
                   <button type="button" onClick={close} className="chat-icon-btn" aria-label="Close chat" title="Close">
                     <FaTimes aria-hidden="true" />
                   </button>

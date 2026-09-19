@@ -1,6 +1,9 @@
 // Tiny, safe Markdown renderer for chat answers: paragraphs, bullet/numbered lists,
 // **bold**, [links](url), bare URLs and emails. Builds React elements, never raw HTML.
 import React from "react";
+import { navigateTo } from "./chatEvents";
+
+const OWN_SITE = /^https?:\/\/(www\.)?diarmuid\.dev/i;
 
 const INLINE = /\*\*(.+?)\*\*|\[([^\]]+)\]\(([^)\s]+)\)|(https?:\/\/[^\s)]+[^\s).,!?])|([\w.+-]+@[\w-]+\.[\w.]+\w)/g;
 
@@ -10,13 +13,20 @@ function safeHref(url) {
   return null;
 }
 
-// Same-page anchors (#experience, /#contact) scroll smoothly when the section exists here.
+// Links back into this site are handled in place instead of reloading the page:
+// same-page anchors (#experience, /#contact) scroll smoothly, and routes such as
+// /projects/aabci open through the router so the chat can drive the page.
 function handleInternalClick(e, href, onNavigate) {
-  const hash = href.startsWith("#") ? href : href.startsWith("/#") ? href.slice(1) : null;
+  const path = href.replace(OWN_SITE, "") || "/";
+  const hash = path.startsWith("#") ? path : path.startsWith("/#") ? path.slice(1) : null;
   const target = hash && document.getElementById(hash.slice(1));
   if (target) {
     e.preventDefault();
     target.scrollIntoView({ behavior: "smooth", block: "start" });
+    onNavigate?.();
+  } else if (!hash && path.startsWith("/projects/")) {
+    e.preventDefault();
+    navigateTo(path);
     onNavigate?.();
   }
 }
@@ -24,7 +34,7 @@ function handleInternalClick(e, href, onNavigate) {
 function Link({ href, children, onNavigate }) {
   const safe = safeHref(href);
   if (!safe) return <>{children}</>;
-  const external = /^https?:/i.test(safe) && !/^https?:\/\/(www\.)?diarmuid\.dev/i.test(safe);
+  const external = /^https?:/i.test(safe) && !OWN_SITE.test(safe);
   return (
     <a
       href={safe}

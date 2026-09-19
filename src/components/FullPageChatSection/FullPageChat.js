@@ -1,5 +1,6 @@
 // components/FullPageChat/FullPageChat.js
 import React, { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaArrowLeft } from "react-icons/fa";
 import ChatPanel from "../ChatSection/ChatPanel";
@@ -30,10 +31,10 @@ export default function FullPageChat() {
           chat={chat}
           variant="page"
           headerActions={
-            <a href="/" className="chat-icon-btn chat-back-btn" aria-label="Back to portfolio" title="Back to portfolio">
+            <Link to="/" className="chat-icon-btn chat-back-btn" aria-label="Back to portfolio" title="Back to portfolio">
               <FaArrowLeft aria-hidden="true" />
               <span className="d-none d-sm-inline">Portfolio</span>
-            </a>
+            </Link>
           }
         />
       </div>

@@ -3,6 +3,7 @@ import { Element, Link } from "react-scroll";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { FaArrowDown, FaGithub, FaLinkedin } from "react-icons/fa";
 import data from "../../JsonFolders/portfolio.json"
+import Magnetic from "../Magnetic/Magnetic";
 import './Home.css'
 
 const ROLES = ["Full Stack Developer", "C# & .NET", "React & TypeScript", "Python", "Cloud & AWS"];
@@ -88,24 +89,20 @@ const HomeSection = () => {
           </motion.p>
 
           <motion.div className="hero-actions" variants={item}>
-            <Link to="projects" href="#projects" smooth={true} duration={500}>
-              <motion.span
-                className="btn-brand"
-                whileHover={{ y: -3 }}
-                whileTap={{ scale: 0.96 }}
-              >
-                View my work <FaArrowDown aria-hidden="true" />
-              </motion.span>
-            </Link>
-            <Link to="contact" href="#contact" smooth={true} duration={600}>
-              <motion.span
-                className="btn-brand-outline"
-                whileHover={{ y: -3 }}
-                whileTap={{ scale: 0.96 }}
-              >
-                Get in touch
-              </motion.span>
-            </Link>
+            <Magnetic>
+              <Link to="projects" href="#projects" smooth={true} duration={500}>
+                <motion.span className="btn-brand" whileTap={{ scale: 0.96 }}>
+                  View my work <FaArrowDown aria-hidden="true" />
+                </motion.span>
+              </Link>
+            </Magnetic>
+            <Magnetic>
+              <Link to="contact" href="#contact" smooth={true} duration={600}>
+                <motion.span className="btn-brand-outline" whileTap={{ scale: 0.96 }}>
+                  Get in touch
+                </motion.span>
+              </Link>
+            </Magnetic>
           </motion.div>
 
           <motion.div className="hero-socials" variants={item}>

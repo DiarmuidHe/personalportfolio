@@ -2,7 +2,10 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-scroll";
 import { FaGithub, FaLinkedin, FaEnvelope, FaArrowUp } from "react-icons/fa";
+import { PALETTE_OPEN_EVENT } from "../CommandPalette/CommandPalette";
 import './footer.css'
+
+const IS_MAC = typeof navigator !== "undefined" && /Mac|iPhone|iPad/.test(navigator.platform);
 
 const SOCIALS = [
   { icon: FaGithub, label: "GitHub", href: "https://github.com/DiarmuidHe" },
@@ -65,9 +68,18 @@ const Footer = () => {
           <p className="mb-0">
             © {new Date().getFullYear()} Diarmuid Hession. All rights reserved.
           </p>
-          <Link to="Home" href="#Home" smooth={true} duration={600} className="back-to-top">
-            Back to top <FaArrowUp aria-hidden="true" />
-          </Link>
+          <div className="d-flex align-items-center gap-4">
+            <button
+              type="button"
+              className="footer-jump"
+              onClick={() => window.dispatchEvent(new Event(PALETTE_OPEN_EVENT))}
+            >
+              Quick jump <kbd className="footer-kbd">{IS_MAC ? "⌘" : "Ctrl"} K</kbd>
+            </button>
+            <Link to="Home" href="#Home" smooth={true} duration={600} className="back-to-top">
+              Back to top <FaArrowUp aria-hidden="true" />
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

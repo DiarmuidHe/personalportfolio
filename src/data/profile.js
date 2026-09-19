@@ -215,9 +215,20 @@ export function dateRange(job) {
   return `${formatMonth(job.start)} – ${formatMonth(job.end)}`;
 }
 
+// URL-safe id for a project, used by the /projects/:slug case-study links
+export function projectSlug(title) {
+  return title
+    .toLowerCase()
+    .split(" - ")[0]
+    .replace(/[^a-z0-9#]+/g, "-")
+    .replace(/#/g, "sharp")
+    .replace(/^-+|-+$/g, "");
+}
+
 export const PROJECTS = [
   ...portfolio.images.projects.map(({ title, description, link, highlight, linkNote }) => ({
     title,
+    slug: projectSlug(title),
     description,
     highlight: highlight || null,
     link: link && link !== "#" ? link : null,
@@ -237,7 +248,8 @@ export function buildKnowledgeBase(now = new Date()) {
   ).join("\n");
   const projects = PROJECTS.map((pr) => {
     const details = pr.details ? `\n${pr.details.map((d) => `  - ${d}`).join("\n")}` : "";
-    return `- ${pr.title}: ${pr.highlight ? `${pr.highlight} ` : ""}${pr.description}${pr.link ? ` Link: ${pr.link}` : pr.linkNote ? ` Link: ${pr.linkNote}.` : ""}${details}`;
+    const page = pr.slug ? ` Case study: ${p.links.portfolio}/projects/${pr.slug}` : "";
+    return `- ${pr.title}:${page} ${pr.highlight ? `${pr.highlight} ` : ""}${pr.description}${pr.link ? ` Link: ${pr.link}` : pr.linkNote ? ` Link: ${pr.linkNote}.` : ""}${details}`;
   }).join("\n");
   const skills = Object.entries(p.skills)
     .map(([k, v]) => `- ${k}: ${v.join(", ")}`)

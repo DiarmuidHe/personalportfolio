@@ -26,7 +26,15 @@ const ContactSection = () => {
     message: "",
   });
   const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
   const [notification, setNotification] = useState(null);
+
+  // After a successful send the button says "Sent" for a moment, then resets
+  useEffect(() => {
+    if (!sent) return;
+    const id = setTimeout(() => setSent(false), 3000);
+    return () => clearTimeout(id);
+  }, [sent]);
 
   // Auto-hide the toast 5s after it appears
   useEffect(() => {
@@ -52,6 +60,7 @@ const ContactSection = () => {
       )
       .then(() => {
         setNotification({ type: "success", message: "Message sent! I'll get back to you soon." });
+        setSent(true);
         setFormData({ name: "", email: "", message: "" });
       })
       .catch((error) => {
@@ -166,15 +175,38 @@ const ContactSection = () => {
                   <div className="col-12 d-flex justify-content-end">
                     <motion.button
                       type="submit"
-                      className="btn-brand contact-submit"
-                      disabled={sending}
-                      whileHover={sending ? undefined : { y: -3 }}
-                      whileTap={sending ? undefined : { scale: 0.96 }}
+                      className={`btn-brand contact-submit ${sent ? "is-sent" : ""}`}
+                      disabled={sending || sent}
+                      whileHover={sending || sent ? undefined : { y: -3 }}
+                      whileTap={sending || sent ? undefined : { scale: 0.96 }}
                     >
                       {sending ? (
                         <>
                           <span className="spinner-border spinner-border-sm" aria-hidden="true" />
                           Sending…
+                        </>
+                      ) : sent ? (
+                        <>
+                          {/* The plane takes off, the tick lands where it was */}
+                          <motion.span
+                            className="send-flight"
+                            aria-hidden="true"
+                            initial={{ x: 0, y: 0, opacity: 1, rotate: 0 }}
+                            animate={{ x: 90, y: -60, opacity: 0, rotate: -12 }}
+                            transition={{ duration: 0.7, ease: [0.5, 0, 0.75, 0] }}
+                          >
+                            <FaPaperPlane />
+                          </motion.span>
+                          <motion.span
+                            className="d-inline-flex"
+                            aria-hidden="true"
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ delay: 0.45, type: "spring", stiffness: 400, damping: 18 }}
+                          >
+                            <FaCheckCircle />
+                          </motion.span>
+                          Sent
                         </>
                       ) : (
                         <>

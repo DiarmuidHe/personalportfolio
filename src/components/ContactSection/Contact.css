@@ -107,6 +107,24 @@
   resize: vertical;
 }
 
+.contact-submit {
+  position: relative;
+  min-width: 190px;
+}
+
+.contact-submit.is-sent,
+.contact-submit.is-sent:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.send-flight {
+  position: absolute;
+  left: 1.75rem;
+  display: inline-flex;
+  pointer-events: none;
+}
+
 .contact-submit .send-icon {
   transition: transform 0.3s ease;
 }
