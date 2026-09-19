@@ -1,0 +1,311 @@
+.education {
+  --edu-gold: #e0b94f;
+  --edu-gold-deep: #9a7412;
+}
+
+.edu-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+/* ---------- Hero band ---------- */
+.edu-hero {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  color: #fff;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(224, 185, 79, 0.18), transparent 45%),
+    linear-gradient(135deg, var(--brand) 0%, #0b4d92 100%);
+  isolation: isolate;
+}
+
+/* Faint grid texture */
+.edu-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(90deg, transparent, #000 70%);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 70%);
+}
+
+.edu-hero-text {
+  flex: 1 1 320px;
+  min-width: 0;
+}
+
+.edu-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.75rem;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.edu-degree {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.edu-school {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0 0 0.25rem;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.edu-status {
+  margin: 0 0 1.5rem;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.93rem;
+}
+
+.edu-credits {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  max-width: 420px;
+}
+
+.edu-credits-bar {
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  overflow: hidden;
+}
+
+.edu-credits-fill {
+  display: block;
+  height: 100%;
+  background: #fff;
+  border-radius: inherit;
+  transform-origin: left;
+}
+
+.edu-credits-label {
+  flex-shrink: 0;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Score ring ---------- */
+.edu-score {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 auto;
+}
+
+.edu-ring {
+  position: relative;
+  width: 168px;
+  height: 168px;
+}
+
+.edu-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.edu-ring-track,
+.edu-ring-fill {
+  fill: none;
+  stroke-width: 9;
+}
+
+.edu-ring-track {
+  stroke: rgba(255, 255, 255, 0.15);
+}
+
+.edu-ring-fill {
+  stroke: var(--edu-gold);
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 6px rgba(224, 185, 79, 0.45));
+}
+
+.edu-ring-value {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.edu-ring-number {
+  font-size: 3.2rem;
+  color: var(--edu-gold);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.edu-ring-caption {
+  margin-top: 0.3rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.edu-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  background: var(--edu-gold);
+  color: #1d1600;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(224, 185, 79, 0.35);
+}
+
+
+/* ---------- Module bars ---------- */
+.edu-modules {
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.edu-modules-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.edu-modules-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--brand);
+}
+
+.edu-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.edu-legend-mark {
+  width: 2px;
+  height: 14px;
+  background: var(--edu-gold-deep);
+}
+
+.edu-bars {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.1rem 3rem;
+}
+
+@media (min-width: 768px) {
+  .edu-bars {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.edu-bar-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.edu-bar-title {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.edu-bar-grade {
+  font-weight: 700;
+  color: var(--brand);
+  font-variant-numeric: tabular-nums;
+}
+
+.edu-bar-track {
+  position: relative;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--brand-08);
+}
+
+.edu-bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--brand), #1a6cc4);
+  transform-origin: left;
+}
+
+.edu-bar-mark {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--edu-gold-deep);
+  border-radius: 1px;
+}
+
+.edu-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+
+@media (max-width: 575.98px) {
+  .edu-ring {
+    width: 144px;
+    height: 144px;
+  }
+
+  .edu-ring-number {
+    font-size: 2.7rem;
+  }
+}

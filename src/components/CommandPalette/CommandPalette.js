@@ -17,6 +17,7 @@ const SECTIONS = [
   ["Home", "Home"],
   ["about", "About"],
   ["experience", "Experience"],
+  ["education", "Education"],
   ["projects", "Projects"],
   ["contact", "Contact"],
 ];

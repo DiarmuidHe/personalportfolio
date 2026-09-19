@@ -20,7 +20,21 @@ export const PROFILE = {
     degree: "BSc (Hons) Computing (Software), Level 8",
     school: "ATU Sligo",
     status: "Returning for his 4th (final) year in October 2026.",
-    note: "Averaging a 2:1. Strongest modules: Object Oriented Development (81), Object Oriented Programming (80), Web Programming (79).",
+    note: "Achieved First Class Honours (1:1) in 3rd year. Strongest modules: Object Oriented Development (81), Object Oriented Programming (80), Open Stack Development (77), Project 300 (74).",
+    graduation: "2027",
+    yearThree: {
+      classification: "First Class Honours (1:1)",
+      credits: { earned: 180, total: 240 },
+      // Strongest 3rd-year modules, shown on the Education section
+      modules: [
+        { title: "Open Stack Development", grade: 77 },
+        { title: "Database Programming", grade: 76 },
+        { title: "Mobile Application Development", grade: 76 },
+        { title: "Professional Development", grade: 75 },
+        { title: "Project 300", grade: 74 },
+        { title: "Web Programming 2", grade: 72 },
+      ],
+    },
   },
   skills: {
     Languages: ["C#", ".NET", "Python", "Java", "JavaScript", "TypeScript", "C++", "SQL"],

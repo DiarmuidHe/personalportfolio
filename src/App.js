@@ -13,6 +13,7 @@ import HomeSection from "./components/HomeSection/Home";
 import AchievementsSection from "./components/AchievementSection/Achievement";
 import AboutSection from "./components/AboutSection/About";
 import ExperienceSection from "./components/ExperienceSection/Experience";
+import EducationSection from "./components/EducationSection/Education";
 import ProjectsSection from "./components/ProjectSection/Project";
 import ContactSection from "./components/ContactSection/Contact";
 import FooterSection from "./components/FooterSection/footer";
@@ -32,7 +33,7 @@ function MainPage() {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 100;
 
-      const sections = ['Home', 'about', 'experience', 'projects', 'contact'].map(section => {
+      const sections = ['Home', 'about', 'experience', 'education', 'projects', 'contact'].map(section => {
         const element = document.getElementById(section);
         return {
           id: section,
@@ -64,6 +65,7 @@ function MainPage() {
       <HomeSection activeSection={activeSection} />
       <AboutSection/>
       <ExperienceSection />
+      <EducationSection />
       <AchievementsSection/>
       <ProjectsSection />
       <ContactSection />
