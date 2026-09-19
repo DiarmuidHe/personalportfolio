@@ -1,0 +1,255 @@
+/* ---------- Toolbar ---------- */
+.xp-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: -1.5rem 0 2.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.xp-filters {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.xp-filter {
+  position: relative;
+  border: none;
+  background: transparent;
+  min-height: 44px;
+  padding: 0.5rem 0;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.xp-filter:hover,
+.xp-filter.is-active {
+  color: var(--brand);
+}
+
+.xp-filter-underline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--brand);
+}
+
+/* Plain text-style buttons ("Ask about this role") */
+.xp-text-link {
+  border: none;
+  background: none;
+  padding: 0.25rem 0;
+  min-height: 44px;
+  color: var(--brand);
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.xp-text-link:hover {
+  text-decoration-thickness: 2px;
+}
+
+.xp-card .xp-text-link {
+  min-height: 0;
+  font-size: 0.88rem;
+}
+
+/* ---------- Timeline ---------- */
+.xp-timeline {
+  position: relative;
+  --rail-x: 8px;
+}
+
+.xp-rail {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--rail-x);
+  width: 2px;
+  margin-left: -1px;
+  background: var(--border);
+}
+
+.xp-rail-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--brand);
+  transform-origin: top;
+}
+
+.xp-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.xp-item {
+  position: relative;
+  padding-left: calc(var(--rail-x) + 24px);
+}
+
+.xp-node {
+  position: absolute;
+  left: var(--rail-x);
+  top: 1.6rem;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--brand);
+  z-index: 1;
+}
+
+.xp-node.is-current {
+  background: var(--brand);
+}
+
+/* ---------- Card ---------- */
+.xp-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: clamp(1.25rem, 2.5vw, 1.5rem);
+}
+
+.xp-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin: 0 0 0.4rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.xp-meta time {
+  font-weight: 600;
+  color: var(--brand);
+}
+
+.xp-current {
+  font-weight: 600;
+  color: #1e7e34;
+}
+
+.xp-role {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--brand);
+  margin: 0 0 0.15rem;
+}
+
+.xp-company {
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 0.2rem;
+}
+
+.xp-location {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin: 0 0 0.9rem;
+}
+
+.xp-stages {
+  margin: 0 0 0.9rem;
+  padding-left: 1.2rem;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.xp-stage-title {
+  font-weight: 600;
+  color: #333;
+}
+
+.xp-highlights {
+  margin: 0 0 0.9rem;
+  padding-left: 1.2rem;
+  color: #333;
+  line-height: 1.65;
+  font-size: 0.97rem;
+}
+
+.xp-highlights li + li {
+  margin-top: 0.25rem;
+}
+
+.xp-skills {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.xp-skills-label {
+  font-weight: 600;
+  color: #333;
+}
+
+/* ---------- Desktop: alternating two-sided timeline ---------- */
+@media (min-width: 992px) {
+  .xp-timeline {
+    --rail-x: 50%;
+  }
+
+  .xp-list {
+    gap: 0;
+  }
+
+  .xp-item {
+    width: 50%;
+    padding-left: 0;
+    padding-bottom: 1.5rem;
+  }
+
+  .xp-item + .xp-item {
+    margin-top: -3rem; /* let the two columns interleave */
+  }
+
+  .xp-left {
+    align-self: flex-start;
+    padding-right: 2.5rem;
+  }
+
+  .xp-right {
+    align-self: flex-end;
+    padding-left: 2.5rem;
+  }
+
+  .xp-left .xp-node {
+    left: 100%;
+  }
+
+  .xp-right .xp-node {
+    left: 0;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .xp-toolbar {
+    margin-top: -1rem;
+  }
+
+  .xp-filters {
+    gap: 1rem;
+  }
+}

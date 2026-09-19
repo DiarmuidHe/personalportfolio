@@ -1,22 +1,39 @@
 "use client";
 import { Element } from "react-scroll";
-import { useRef, useState } from "react";
-import { useInView, motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import emailjs from "@emailjs/browser";
-import data from "../../JsonFolders/portfolio.json";
+import { FaEnvelope, FaGithub, FaLinkedin, FaPaperPlane, FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
+import SectionHeading from "../SectionHeading/SectionHeading";
 
 import "./Contact.css";
 
-const ContactSection = () => {
-  const images = data.images;
+const CHANNELS = [
+  { icon: FaEnvelope, label: "Email", value: "code@diarmuid.dev", href: "mailto:code@diarmuid.dev" },
+  { icon: FaLinkedin, label: "LinkedIn", value: "in/d-hession", href: "https://www.linkedin.com/in/d-hession" },
+  { icon: FaGithub, label: "GitHub", value: "DiarmuidHe", href: "https://github.com/DiarmuidHe" },
+];
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+};
+
+const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
-
+  const [sending, setSending] = useState(false);
   const [notification, setNotification] = useState(null);
+
+  // Auto-hide the toast 5s after it appears
+  useEffect(() => {
+    if (!notification) return;
+    const id = setTimeout(() => setNotification(null), 5000);
+    return () => clearTimeout(id);
+  }, [notification]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,6 +41,7 @@ const ContactSection = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setSending(true);
 
     emailjs
       .send(
@@ -32,9 +50,8 @@ const ContactSection = () => {
         formData,
         "Xve_WZi_W9ZM1YQXP"
       )
-      .then((result) => {
-        console.log("Email sent:", result.text);
-        setNotification({ type: "success", message: "Message sent successfully!" });
+      .then(() => {
+        setNotification({ type: "success", message: "Message sent! I'll get back to you soon." });
         setFormData({ name: "", email: "", message: "" });
       })
       .catch((error) => {
@@ -43,124 +60,166 @@ const ContactSection = () => {
           type: "error",
           message: "Failed to send message. Please try again.",
         });
-      });
-
-    // Auto-hide after 4s
-    setTimeout(() => setNotification(null), 4000);
+      })
+      .finally(() => setSending(false));
   };
-
-  const ref = useRef(null);
-  const isInView = useInView(ref, { margin: "-100px", once: false });
 
   return (
     <Element name="contact" id="contact">
-      <main style={{ overflowX: "hidden" }}>
-        <div style={{ minHeight: "70vh", paddingTop: "70px", position: "relative" }}>
-          <div className="container">
-            {/* Title Animation */}
+      <section className="section contact" aria-labelledby="contact-title">
+        <div className="container">
+          <SectionHeading title="Contact" id="contact-title" />
+
+          <div className="row g-4 g-lg-5">
+            {/* Intro + direct channels */}
             <motion.div
-              ref={ref}
-              initial={{ x: -200, opacity: 0 }}
-              animate={isInView ? { x: 0, opacity: 1 } : { x: -200, opacity: 0 }}
-              transition={{ duration: 0.8 }}
+              className="col-lg-5"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
             >
-              <h1 className="fw-bold page-title">Contact</h1>
+              <h3 className="contact-lead">Have a project in mind or just want to say hi?</h3>
+              <p className="contact-sub">
+                My inbox is always open. Send a message using the form or reach me directly on
+                any of the channels below.
+              </p>
+
+              <ul className="contact-channels">
+                {CHANNELS.map(({ icon: Icon, label, value, href }) => (
+                  <motion.li key={label} whileHover={{ x: 6 }} transition={{ type: "spring", stiffness: 300 }}>
+                    <a
+                      href={href}
+                      className="contact-channel"
+                      {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    >
+                      <span className="contact-channel-icon" aria-hidden="true"><Icon /></span>
+                      <span>
+                        <span className="contact-channel-label">{label}</span>
+                        <span className="contact-channel-value">{value}</span>
+                      </span>
+                    </a>
+                  </motion.li>
+                ))}
+              </ul>
             </motion.div>
 
             {/* Form */}
             <motion.div
-              className="mt-5"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="col-lg-7"
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-80px" }}
             >
-              <form onSubmit={handleSubmit} className="mx-auto">
-                <div className="mb-3">
-                  <label htmlFor="name" className="form-label">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control rounded-4"
-                    id="name"
-                    name="name"
-                    required
-                    value={formData.name}
-                    onChange={handleChange}
-                  />
-                </div>
+              <form onSubmit={handleSubmit} className="contact-form">
+                <div className="row g-3">
+                  <div className="col-md-6">
+                    <div className="form-floating">
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="name"
+                        name="name"
+                        placeholder="Your name"
+                        autoComplete="name"
+                        required
+                        value={formData.name}
+                        onChange={handleChange}
+                      />
+                      <label htmlFor="name">Name</label>
+                    </div>
+                  </div>
 
-                <div className="mb-3">
-                  <label htmlFor="email" className="form-label">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    className="form-control rounded-4"
-                    id="email"
-                    name="email"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
-                  />
-                </div>
+                  <div className="col-md-6">
+                    <div className="form-floating">
+                      <input
+                        type="email"
+                        className="form-control"
+                        id="email"
+                        name="email"
+                        placeholder="you@example.com"
+                        autoComplete="email"
+                        required
+                        value={formData.email}
+                        onChange={handleChange}
+                      />
+                      <label htmlFor="email">Email</label>
+                    </div>
+                  </div>
 
-                <div className="mb-3">
-                  <label htmlFor="message" className="form-label">
-                    Message
-                  </label>
-                  <textarea
-                    className="form-control rounded-4"
-                    id="message"
-                    name="message"
-                    rows="5"
-                    required
-                    value={formData.message}
-                    onChange={handleChange}
-                  ></textarea>
-                </div>
+                  <div className="col-12">
+                    <div className="form-floating">
+                      <textarea
+                        className="form-control contact-textarea"
+                        id="message"
+                        name="message"
+                        placeholder="Your message"
+                        required
+                        value={formData.message}
+                        onChange={handleChange}
+                      ></textarea>
+                      <label htmlFor="message">Message</label>
+                    </div>
+                  </div>
 
-                <motion.button
-                  type="submit"
-                  className="btn rounded-4"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <img
-                    className="me-2"
-                    src={images.buttons.send}
-                    height="25em"
-                    alt="simple aeroplane send icon"
-                  />
-                  Send
-                </motion.button>
+                  <div className="col-12 d-flex justify-content-end">
+                    <motion.button
+                      type="submit"
+                      className="btn-brand contact-submit"
+                      disabled={sending}
+                      whileHover={sending ? undefined : { y: -3 }}
+                      whileTap={sending ? undefined : { scale: 0.96 }}
+                    >
+                      {sending ? (
+                        <>
+                          <span className="spinner-border spinner-border-sm" aria-hidden="true" />
+                          Sending…
+                        </>
+                      ) : (
+                        <>
+                          <FaPaperPlane className="send-icon" aria-hidden="true" />
+                          Send message
+                        </>
+                      )}
+                    </motion.button>
+                  </div>
+                </div>
               </form>
             </motion.div>
-
-            {/* Notification Toast */}
-            <AnimatePresence>
-              {notification && (
-                <motion.div
-                  key="toast"
-                  initial={{ y: -50, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -50, opacity: 0 }}
-                  transition={{ duration: 0.4 }}
-                  className={`toast-message ${notification.type}`}
-                >
-                  <span>{notification.message}</span>
-                  <button
-                    className="toast-close"
-                    onClick={() => setNotification(null)}
-                  >
-                    ×
-                  </button>
-                </motion.div>
-              )}
-            </AnimatePresence>
           </div>
         </div>
-      </main>
+
+        {/* Notification Toast */}
+        <div aria-live="polite" role="status">
+          <AnimatePresence>
+            {notification && (
+              <motion.div
+                key="toast"
+                initial={{ y: -40, opacity: 0, scale: 0.95 }}
+                animate={{ y: 0, opacity: 1, scale: 1 }}
+                exit={{ y: -40, opacity: 0, scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 300, damping: 24 }}
+                className={`toast-message ${notification.type}`}
+              >
+                {notification.type === "success" ? (
+                  <FaCheckCircle aria-hidden="true" />
+                ) : (
+                  <FaExclamationCircle aria-hidden="true" />
+                )}
+                <span className="flex-grow-1">{notification.message}</span>
+                <button
+                  className="toast-close"
+                  onClick={() => setNotification(null)}
+                  aria-label="Dismiss notification"
+                >
+                  ×
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </section>
     </Element>
   );
 };

@@ -1,46 +1,144 @@
-.project-image {
+.project-card {
   width: 100%;
-  height: clamp(10em, 25vw, 15em); /* scales with screen size */
-  object-fit: cover;
-  border-radius: 0.5rem;
-  background-color: #07376a;
+  display: flex;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--brand-08);
+  transition: box-shadow 0.35s ease, border-color 0.35s ease;
+  will-change: transform;
 }
 
-.card {
-  height: clamp(20em, 60vw, 28em); /* flexible height */
-  overflow: hidden; 
-  border-radius: 1rem;
-  border-color: #07376a;
+.project-card:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--brand-15);
 }
 
-.card-title {
-  color:#07376a;
-  font-size: clamp(1rem, 2vw, 1.5rem); /* scales from mobile → desktop */
-  font-weight: bold;
-}
-
-.card-text {
-  font-size: clamp(0.8rem, 1.5vw, 1rem);
-  line-height: 1.4;
-}
-
-a {
-  text-decoration: none;
+.project-link {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   color: inherit;
 }
 
-/* Extra Responsive Tweaks */
-@media (max-width: 576px) {
-  .project-image {
-    height: 10em;
-  }
-  .card {
-    height: auto; /* let it expand naturally on small screens */
-  }
+.project-link:focus-visible {
+  outline-offset: -3px;
+  border-radius: var(--radius-lg);
 }
 
-@media (min-width: 768px) and (max-width: 991px) {
-  .project-image {
-    height: 12em;
-  }
+.project-media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background-color: var(--brand);
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-image-icon {
+  object-fit: contain;
+  padding: 2.5rem;
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.08);
+}
+
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(7, 55, 106, 0.55);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.project-overlay-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: var(--radius-sm);
+  background: #fff;
+  color: var(--brand);
+  font-weight: 700;
+  font-size: 0.9rem;
+  transform: translateY(12px);
+  transition: transform 0.35s ease;
+}
+
+.project-card:hover .project-overlay,
+.project-link:focus-visible .project-overlay {
+  opacity: 1;
+}
+
+.project-card:hover .project-overlay-pill,
+.project-link:focus-visible .project-overlay-pill {
+  transform: translateY(0);
+}
+
+.project-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.project-title {
+  color: var(--brand);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.project-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  flex-grow: 1;
+  margin-bottom: 1rem;
+}
+
+.project-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--brand);
+}
+
+.project-cta svg {
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-cta svg {
+  transform: translateX(5px);
+}
+
+.project-link-private {
+  cursor: default;
+}
+
+.project-highlight {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--brand);
+  margin-bottom: 0.5rem;
+}
+
+.project-cta-muted {
+  color: var(--text-muted);
+}
+
+.project-card:hover .project-cta-muted svg {
+  transform: none;
 }

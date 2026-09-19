@@ -66,6 +66,22 @@
         ],
         "projects":[
           {
+            "src": "https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/project_imgs/aabci.png",
+            "alt": "AABCI ballot verification",
+            "link": null,
+            "linkNote": "Available upon request",
+            "title": "AABCI - AI Automated Ballot Counter Ireland",
+            "highlight": "Built in collaboration with an electoral commission consultant.",
+            "description":"Reads photos or scans of ranked-preference ballots, verifies the official stamp with a YOLO model, reads handwritten preferences with a TensorFlow network, and flags anything uncertain for a person. Runs from the command line, a phone, beside a scanner or on AWS, with a full audit trail."
+          },
+          {
+            "src": "https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/project_imgs/Aithne.png",
+            "alt": "Aithne Fish Detection dashboard",
+            "link": "https://github.com/DiarmuidHe/Aithne-Fish-Detection",
+            "title": "Aithne Fish Detection",
+            "description":"An AI system that detects, tracks, counts and identifies fish in underwater video and on 17 live ocean cameras. Built on VIAME with Python, FastAPI, PostgreSQL, React and Docker."
+          },
+          {
             "src": "https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/project_imgs/personal_portfolio.png",
             "alt": "Personal Portfolio",
             "link": "https://diarmuid.dev/",

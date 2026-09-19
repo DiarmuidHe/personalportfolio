@@ -1,47 +1,75 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { Link } from "react-scroll";
+import { FaGithub, FaLinkedin, FaEnvelope, FaArrowUp } from "react-icons/fa";
 import './footer.css'
+
+const SOCIALS = [
+  { icon: FaGithub, label: "GitHub", href: "https://github.com/DiarmuidHe" },
+  { icon: FaLinkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/d-hession" },
+  { icon: FaEnvelope, label: "Email", href: "mailto:code@diarmuid.dev" },
+];
+
+const LINKS = [
+  { to: "about", label: "About" },
+  { to: "projects", label: "Projects" },
+  { to: "contact", label: "Contact" },
+];
+
 const Footer = () => {
   return (
-    <footer className="footer text-light py-4 mt-5">
+    <footer className="footer text-light">
       <motion.div
-        className="container text-center"
+        className="container footer-inner"
         initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <h5 className="fw-bold mb-3">Diarmuid Hession</h5>
-        
-        <div className="mb-3">
-          <a
-            href="https://github.com/DiarmuidHe"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-light mx-3"
-          >
-            <FaGithub size={22} />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/d-hession"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-light mx-3"
-          >
-            <FaLinkedin size={22} />
-          </a>
-          <a
-            href="mailto:code@diarmuid.dev"
-            className="text-light mx-3"
-          >
-            <FaEnvelope size={22} />
-          </a>
+        <div className="footer-brand">
+          <h2 className="footer-name">Diarmuid Hession</h2>
+          <p className="footer-role">Full Stack Developer</p>
         </div>
 
-        <p className="mb-0" style={{ fontSize: "0.9rem" }}>
-          © {new Date().getFullYear()} Diarmuid Hession. All rights reserved.
-        </p>
+        <nav aria-label="Footer">
+          <ul className="footer-links">
+            {LINKS.map((l) => (
+              <li key={l.to}>
+                <Link to={l.to} href={`#${l.to}`} smooth={true} duration={500}>
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+            <li><a href="/cv">CV</a></li>
+          </ul>
+        </nav>
+
+        <div className="footer-socials">
+          {SOCIALS.map(({ icon: Icon, label, href }) => (
+            <motion.a
+              key={label}
+              href={href}
+              aria-label={label}
+              {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              whileHover={{ y: -4, scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Icon size={20} />
+            </motion.a>
+          ))}
+        </div>
       </motion.div>
+
+      <div className="footer-bottom">
+        <div className="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+          <p className="mb-0">
+            © {new Date().getFullYear()} Diarmuid Hession. All rights reserved.
+          </p>
+          <Link to="Home" href="#Home" smooth={true} duration={600} className="back-to-top">
+            Back to top <FaArrowUp aria-hidden="true" />
+          </Link>
+        </div>
+      </div>
     </footer>
   );
 };

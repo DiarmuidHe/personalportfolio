@@ -1,91 +1,107 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-scroll";
+import { motion, useScroll, useSpring } from "framer-motion";
+import { FaFileAlt } from "react-icons/fa";
 import './Navigation.css'
 
+const NAV_ITEMS = [
+  { id: "Home", label: "Home" },
+  { id: "about", label: "About" },
+  { id: "experience", label: "Experience" },
+  { id: "projects", label: "Projects" },
+  { id: "contact", label: "Contact" },
+];
+
 const Navigation = ({ activeSection }) => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Reading-progress bar along the bottom edge of the navbar
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 25, restDelta: 0.001 });
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const closeMenu = () => setMenuOpen(false);
+
   return (
-    <div className="sticky-top" >
-      <nav className="navbar navbar-expand-lg navbar-dark rounded-bottom-3 mb-3">
-        <div className="container-fluid">
-          {/* Brand/logo - removed collapse triggers from this */}
-          <Link 
-            to="Home" 
-            smooth={true} 
-            duration={250} 
-            className={`fw-bold navbar-brand ${activeSection === 'Home' ? 'active fw-bold' : ''}`}
-            style={{ cursor: "pointer" }}
+    <header className={`site-nav sticky-top ${scrolled ? "is-scrolled" : ""}`}>
+      <nav className="navbar navbar-expand-lg navbar-dark" aria-label="Main navigation">
+        <div className="container">
+          <Link
+            to="Home"
+            href="#Home"
+            smooth={true}
+            duration={400}
+            className="navbar-brand d-flex align-items-center gap-2"
+            onClick={closeMenu}
           >
-            <img src="/Logo.png" alt="a prespective view of a logo of diarmuid hession initials (dh)" className="navLogo" />
+            <motion.img
+              src="/Logo.png"
+              alt="Diarmuid Hession home"
+              className="navLogo"
+              whileHover={{ rotate: -8, scale: 1.08 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            />
+            <span className="brand-name d-none d-sm-inline">Diarmuid Hession</span>
           </Link>
-          
-          {/* Toggler button */}
-          <button 
-            className="navbar-toggler" 
-            type="button" 
-            data-bs-toggle="collapse" 
-            data-bs-target="#navbarNav" 
-            aria-controls="navbarNav" 
-            aria-expanded="false" 
-            aria-label="Toggle navigation"
+
+          <button
+            className={`navbar-toggler nav-toggler ${menuOpen ? "open" : ""}`}
+            type="button"
+            aria-controls="navbarNav"
+            aria-expanded={menuOpen}
+            aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+            onClick={() => setMenuOpen((o) => !o)}
           >
-            <span className="navbar-toggler-icon"></span>
+            <span className="toggler-bar" />
+            <span className="toggler-bar" />
+            <span className="toggler-bar" />
           </button>
-          
-          {/* Collapsible content */}
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav mx-auto">
-              <li className="nav-item">
-                <Link 
-                  to="Home" 
-                  smooth={true} 
-                  duration={250} 
-                  className={`nav-link ${activeSection === 'Home' ? 'active fw-bold' : ''}`}
-                  style={{ cursor: "pointer" }}
-                  onClick={() => document.getElementById('navbarNav').classList.remove('show')}
-                >
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link 
-                  to="about" 
-                  smooth={true} 
-                  duration={250} 
-                  className={`nav-link ${activeSection === 'about' ? 'active fw-bold' : ''}`}
-                  style={{ cursor: "pointer" }}
-                  onClick={() => document.getElementById('navbarNav').classList.remove('show')}
-                >
-                  About
-                </Link>
-                </li>
-              <li className="nav-item">
-                <Link 
-                  to="projects" 
-                  smooth={true} 
-                  duration={250} 
-                  className={`nav-link ${activeSection === 'projects' ? 'active fw-bold' : ''}`}
-                  style={{ cursor: "pointer" }}
-                  onClick={() => document.getElementById('navbarNav').classList.remove('show')}
-                >
-                  Projects
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link 
-                    to="contact"
-                    smooth={true}
-                    duration={250}
-                    className={`nav-link ${activeSection === 'contact' ? 'active fw-bold' : ''}`}
-                  style={{ cursor: "pointer" }}
-                  onClick={() => document.getElementById('navbarNav').classList.remove('show')}
-                >
-                  Contact
-                </Link>
+
+          <div className={`collapse navbar-collapse ${menuOpen ? "show" : ""}`} id="navbarNav">
+            <ul className="navbar-nav ms-auto align-items-lg-center">
+              {NAV_ITEMS.map((item, i) => {
+                const isActive = activeSection === item.id;
+                return (
+                  <li className="nav-item" key={item.id} style={{ "--i": i }}>
+                    <Link
+                      to={item.id}
+                      href={`#${item.id}`}
+                      smooth={true}
+                      duration={400}
+                      className={`nav-link ${isActive ? "active" : ""}`}
+                      aria-current={isActive ? "page" : undefined}
+                      onClick={closeMenu}
+                    >
+                      {item.label}
+                      {isActive && (
+                        <motion.span
+                          layoutId="nav-indicator"
+                          className="nav-indicator"
+                          transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                        />
+                      )}
+                    </Link>
+                  </li>
+                );
+              })}
+              <li className="nav-item ms-lg-3" style={{ "--i": NAV_ITEMS.length }}>
+                <a href="/cv" className="nav-cv" onClick={closeMenu}>
+                  <FaFileAlt aria-hidden="true" /> CV
+                </a>
               </li>
             </ul>
           </div>
         </div>
       </nav>
-    </div>
+      <motion.div className="nav-progress" style={{ scaleX: progress }} aria-hidden="true" />
+    </header>
   );
 };
 

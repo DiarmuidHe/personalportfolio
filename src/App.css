@@ -17,3 +17,9 @@
     background-color: #07376a;
     color: rgb(255, 255, 255);
 }
+
+/* Link reset lives here (not index.css) so it loads after Bootstrap's reboot */
+a {
+    text-decoration: none;
+    color: inherit;
+}

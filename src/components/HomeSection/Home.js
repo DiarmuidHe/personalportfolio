@@ -1,76 +1,137 @@
-import { Element } from "react-scroll";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { Link } from "react-scroll";
+import { useEffect, useRef, useState } from "react";
+import { Element, Link } from "react-scroll";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { FaArrowDown, FaGithub, FaLinkedin } from "react-icons/fa";
 import data from "../../JsonFolders/portfolio.json"
 import './Home.css'
 
-const HomeSection = ({ activeSection }) => {
-  const images = data.images
-  const ref = useRef(null);
-  const isInView = useInView(ref, { margin: "-10px", once: false });
+const ROLES = ["Full Stack Developer", "C# & .NET", "React & TypeScript", "Python", "Cloud & AWS"];
 
-  console.log("Is in view:", isInView); // Debug line
+const container = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.15, delayChildren: 0.2 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+};
+
+const HomeSection = () => {
+  const images = data.images;
+  const ref = useRef(null);
+  const [roleIndex, setRoleIndex] = useState(0);
+
+  // Subtle parallax: content drifts up and fades as the hero scrolls away
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
+  useEffect(() => {
+    const id = setInterval(() => setRoleIndex((i) => (i + 1) % ROLES.length), 2400);
+    return () => clearInterval(id);
+  }, []);
 
   return (
-    <div style={{ height: '100vh', overflow:'hidden' }}>
-      <Element name="Home" id="Home">
-        
-        <main className="d-flex flex-column justify-content-center align-items-center" style={{  
-          backgroundImage: "url('/HomeBackground.png')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          height: '100vh',
-          width: '100%', textAlign: 'center' }}>
-        {/* Profile Image at Top */}
-        
-        <img
-          src={images.profile}
-          alt="Diarmuid Hession profile"
-          initial={{ opacity: 0, y: -50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
-          transition={{ duration: 0.8 }}
-          style={{
-            width: '195px',
-            height: '200px',
-            objectFit: 'cover',
-            borderRadius: '50%',
-            marginBottom: '2rem',
-            boxShadow: '0 4px 20px #07376a'
-          }}
-        />
+    <Element name="Home" id="Home">
+      <section
+        ref={ref}
+        className="hero"
+        aria-labelledby="hero-title"
+        style={{ backgroundImage: "url('/HomeBackground.png')" }}
+      >
+        <motion.div
+          className="hero-content container"
+          style={{ y: contentY, opacity: contentOpacity }}
+          variants={container}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.div className="hero-avatar-wrap" variants={item}>
+            <span className="hero-avatar-ring" aria-hidden="true" />
+            <motion.img
+              src={images.profile}
+              alt="Portrait of Diarmuid Hession"
+              className="hero-avatar"
+              width="200"
+              height="200"
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </motion.div>
 
+          <motion.p className="hero-greeting" variants={item}>
+            Hi, I'm
+          </motion.p>
 
-          <h1>
-            Hi, I’m <span style={{ color: "#07376a", fontWeight:"bold" }}>Diarmuid Hession</span>.
-          </h1>
+          <motion.h1 id="hero-title" className="hero-title" variants={item}>
+            Diarmuid Hession
+          </motion.h1>
 
+          <motion.div className="hero-role" variants={item} aria-live="polite">
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={ROLES[roleIndex]}
+                className="hero-role-text"
+                initial={{ opacity: 0, y: 14, filter: "blur(4px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -14, filter: "blur(4px)" }}
+                transition={{ duration: 0.35 }}
+              >
+                {ROLES[roleIndex]}
+              </motion.span>
+            </AnimatePresence>
+          </motion.div>
 
-            <h1>Welcome to my Portfolio!</h1>
+          <motion.p className="hero-tagline" variants={item}>
+            Welcome to my portfolio — I build clean, user-focused experiences across the full stack.
+          </motion.p>
 
+          <motion.div className="hero-actions" variants={item}>
+            <Link to="projects" href="#projects" smooth={true} duration={500}>
+              <motion.span
+                className="btn-brand"
+                whileHover={{ y: -3 }}
+                whileTap={{ scale: 0.96 }}
+              >
+                View my work <FaArrowDown aria-hidden="true" />
+              </motion.span>
+            </Link>
+            <Link to="contact" href="#contact" smooth={true} duration={600}>
+              <motion.span
+                className="btn-brand-outline"
+                whileHover={{ y: -3 }}
+                whileTap={{ scale: 0.96 }}
+              >
+                Get in touch
+              </motion.span>
+            </Link>
+          </motion.div>
 
-          <Link
-            to="projects"
-            smooth={true}
-            duration={250}
-            style={{ cursor: "pointer", marginTop: '2rem' }}
-          >
+          <motion.div className="hero-socials" variants={item}>
+            <a href="https://github.com/DiarmuidHe" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+              <FaGithub />
+            </a>
+            <a href="https://www.linkedin.com/in/d-hession" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+              <FaLinkedin />
+            </a>
+          </motion.div>
+        </motion.div>
 
-          <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 300 }}
-              className="btnViewWork"
-            >
-              <h2>View my work &darr;</h2>
-            
-            </motion.button>
-          </Link>
-      </main>
-
-
-      </Element>
-    </div>
+        <Link
+          to="about"
+          href="#about"
+          smooth={true}
+          duration={500}
+          className="scroll-cue"
+          aria-label="Scroll to About section"
+        >
+          <span className="scroll-cue-mouse">
+            <span className="scroll-cue-wheel" />
+          </span>
+        </Link>
+      </section>
+    </Element>
   );
 };
 

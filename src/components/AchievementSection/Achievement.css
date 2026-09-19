@@ -1,73 +1,114 @@
-.swiper {
-  width: 100%;
-  padding-top: 50px;
-  padding-bottom: 50px;
+.tech-slider {
+  position: relative;
+  padding: 0 3.25rem;
 }
 
-.swiper-slide {
+.tech-swiper {
+  width: 100%;
+  padding: 2rem 0 2.5rem;
+}
+
+.tech-slide {
+  display: flex;
+  justify-content: center;
+  height: auto;
+}
+
+.tech-card {
+  width: 100%;
+  max-width: 220px;
+  aspect-ratio: 1 / 1.1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.tech-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.tech-logo {
+  width: 70%;
+  aspect-ratio: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 150px; /* Adjusted for better spacing on smaller screens */
-  height: 200px;
-  border-radius: 16px;
-  overflow: hidden;
-  background-color: #f9f9f9cb; /* Optional: Adds contrast */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
 }
 
-.swiper-slide:hover {
-  transform: scale(1.05);
+.tech-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.4s ease;
 }
 
-.swiperImage {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* Keeps logo proportions */
-  padding: 6em;        /* Optional: Adds spacing inside the slide */
-}
-.swiper-container-wrapper {
-  position: relative;
-  width: 100%;
-  padding: 0 40px; /* Prevents buttons from overlapping content on small screens */
+.tech-card:hover .tech-logo img {
+  transform: scale(1.08);
 }
 
-.swiper-button-prev,
-.swiper-button-next {
+.tech-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--brand);
+  text-align: center;
+}
+
+/* Non-active slides are dimmed so the centre card pops */
+.tech-slide:not(.swiper-slide-active) .tech-card {
+  opacity: 0.65;
+}
+
+.tech-slide.swiper-slide-active .tech-card {
+  opacity: 1;
+  border-color: var(--brand);
+}
+
+.tech-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
-  width: 40px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.8);
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  color: #333;
+  border: 2px solid var(--brand);
+  background: var(--surface);
+  color: var(--brand);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
   cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
 }
 
-.swiper-button-prev {
+.tech-nav:hover {
+  background: var(--brand);
+  color: #fff;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.tech-prev {
   left: 0;
 }
 
-.swiper-button-next {
+.tech-next {
   right: 0;
 }
 
-.swiper-button-prev:hover,
-.swiper-button-next:hover {
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
+@media (max-width: 576px) {
+  .tech-slider {
+    padding: 0;
+  }
+  .tech-nav {
+    display: none; /* swipe on touch devices */
+  }
 }
-
-.swiper-button-prev::after,
-.swiper-button-next::after {
-  font-size: 18px;
-}
-
-

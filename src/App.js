@@ -6,11 +6,13 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { MotionConfig } from "framer-motion";
 
 import Navigation from "./components/Navigation/Navigation";
 import HomeSection from "./components/HomeSection/Home";
 import AchievementsSection from "./components/AchievementSection/Achievement";
 import AboutSection from "./components/AboutSection/About";
+import ExperienceSection from "./components/ExperienceSection/Experience";
 import ProjectsSection from "./components/ProjectSection/Project";
 import ContactSection from "./components/ContactSection/Contact";
 import FooterSection from "./components/FooterSection/footer";
@@ -27,7 +29,7 @@ function App() {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 100;
 
-      const sections = ['Home','about', 'projects', 'contact'].map(section => {
+      const sections = ['Home', 'about', 'experience', 'projects', 'contact'].map(section => {
         const element = document.getElementById(section);
         return {
           id: section,
@@ -46,11 +48,13 @@ function App() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
+    <MotionConfig reducedMotion="user">
     <Router>
       <div className="background">
         <Routes>
@@ -61,6 +65,7 @@ function App() {
               <ChatOverlay /> 
               <HomeSection activeSection={activeSection} />
               <AboutSection/>
+              <ExperienceSection />
               <AchievementsSection/>
               <ProjectsSection />
               <ContactSection />
@@ -79,6 +84,7 @@ function App() {
         </Routes>
       </div>
     </Router>
+    </MotionConfig>
   );
 }
 
