@@ -28,6 +28,8 @@ import './App.css';
 
 function MainPage() {
   const [activeSection, setActiveSection] = useState('Home');
+  // Technology picked in Tools & Technologies; the projects grid shows only what uses it
+  const [techFilter, setTechFilter] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,8 +68,8 @@ function MainPage() {
       <AboutSection/>
       <ExperienceSection />
       <EducationSection />
-      <AchievementsSection/>
-      <ProjectsSection />
+      <AchievementsSection techFilter={techFilter} onTechFilter={setTechFilter} />
+      <ProjectsSection techFilter={techFilter} onTechFilter={setTechFilter} />
       <ContactSection />
       <FooterSection />
     </>

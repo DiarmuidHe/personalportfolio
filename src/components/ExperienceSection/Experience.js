@@ -6,6 +6,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import SectionHeading from "../SectionHeading/SectionHeading";
 import { EXPERIENCE, dateRange, durationLabel, formatMonth, isCurrent } from "../../data/profile";
 import { askChat } from "../ChatSection/chatEvents";
+import TechStack from "../ProjectSection/TechStack";
 import "./Experience.css";
 
 const FILTERS = [
@@ -154,6 +155,8 @@ function TimelineItem({ job, side }) {
         <p className="xp-skills">
           <span className="xp-skills-label">Skills:</span> {job.skills.join(", ")}
         </p>
+
+        <TechStack stack={job.stack} className="xp-stack" />
 
         <button
           type="button"

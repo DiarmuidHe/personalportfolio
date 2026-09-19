@@ -1,114 +1,285 @@
-.tech-slider {
+.tech-intro {
+  text-align: center;
+  color: var(--text-muted);
+  margin: -0.5rem auto 2.5rem;
+  max-width: 36rem;
+}
+
+.tech-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: 1.5rem;
+  --kb-plate: #e6ebf2;
+  --kb-skirt: #b3bfcf;
+  --kb-skirt-dark: #8e9cb0;
+  --kb-face-top: #ffffff;
+  --kb-face-bottom: #f1f4f8;
+  --kb-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+}
+
+/* A keyboard plate: brushed-ish grey, recessed, with four little screws in the corners */
+.kb-plate {
   position: relative;
-  padding: 0 3.25rem;
+  padding: 1.1rem 1.1rem 1.35rem;
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 12px 12px, #b3bfcf 0 3px, #f7f9fc 3.5px 4px, transparent 4.5px),
+    radial-gradient(circle at calc(100% - 12px) 12px, #b3bfcf 0 3px, #f7f9fc 3.5px 4px, transparent 4.5px),
+    radial-gradient(circle at 12px calc(100% - 12px), #b3bfcf 0 3px, #f7f9fc 3.5px 4px, transparent 4.5px),
+    radial-gradient(circle at calc(100% - 12px) calc(100% - 12px), #b3bfcf 0 3px, #f7f9fc 3.5px 4px, transparent 4.5px),
+    linear-gradient(180deg, #f1f4f8, var(--kb-plate));
+  box-shadow:
+    inset 0 2px 5px rgba(7, 55, 106, 0.1),
+    inset 0 0 0 1px var(--brand-08),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.7),
+    0 1px 0 #fff;
 }
 
-.tech-swiper {
-  width: 100%;
-  padding: 2rem 0 2.5rem;
-}
-
-.tech-slide {
+/* Silkscreened label, the kind printed on the case above a key cluster */
+.kb-plate-title {
   display: flex;
-  justify-content: center;
-  height: auto;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin: 0.15rem 0 1.1rem 0.9rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand);
 }
 
-.tech-card {
-  width: 100%;
-  max-width: 220px;
-  aspect-ratio: 1 / 1.1;
+.kb-plate-index {
+  font-family: var(--kb-mono);
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--kb-skirt-dark);
+}
+
+.kb-keys {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 0.7rem 0.6rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* The key body is the darker "skirt"; the face sits on top of it and travels down when pressed */
+.kb-key {
+  position: relative;
+  display: block;
+  padding: 0 0 6px;
+  border: none;
+  border-radius: 9px;
+  background: linear-gradient(180deg, var(--kb-skirt), var(--kb-skirt-dark));
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.15),
+    0 7px 10px -5px rgba(0, 0, 0, 0.35);
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: box-shadow 0.12s ease;
+}
+
+.kb-key-face {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.75rem;
+  padding: 0.4rem 1.9rem 0.4rem 0.45rem;
+  border-radius: 8px 8px 7px 7px;
+  background: linear-gradient(180deg, var(--kb-face-top), var(--kb-face-bottom));
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 0 -2px 0 rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(0, 0, 0, 0.06);
+  color: var(--brand);
+  transition: transform 0.09s ease-out, background 0.15s ease, color 0.15s ease;
+}
+
+.kb-key-logo {
+  width: 1.9rem;
+  height: 1.9rem;
+  flex-shrink: 0;
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  padding: 1.5rem;
-  background: var(--surface);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border);
-  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  padding: 0.2rem;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+  transition: transform 0.35s cubic-bezier(0.34, 1.8, 0.64, 1);
 }
 
-.tech-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-lg);
-}
-
-.tech-logo {
-  width: 70%;
-  aspect-ratio: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.tech-logo img {
+.kb-key-logo img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  transition: transform 0.4s ease;
 }
 
-.tech-card:hover .tech-logo img {
-  transform: scale(1.08);
+.kb-key-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
-.tech-name {
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: var(--brand);
-  text-align: center;
-}
-
-/* Non-active slides are dimmed so the centre card pops */
-.tech-slide:not(.swiper-slide-active) .tech-card {
-  opacity: 0.65;
-}
-
-.tech-slide.swiper-slide-active .tech-card {
-  opacity: 1;
-  border-color: var(--brand);
-}
-
-.tech-nav {
+/* Corner legends: project count top-right, briefcase bottom-right, like a key's shifted symbol */
+.kb-key-legends {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 2px solid var(--brand);
-  background: var(--surface);
-  color: var(--brand);
+  top: 0.3rem;
+  right: 0.45rem;
+  bottom: 0.3rem;
   display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  font-family: var(--kb-mono);
+  font-size: 0.7rem;
+  line-height: 1;
+  color: var(--kb-skirt-dark);
+}
+
+.kb-key-count {
+  font-weight: 700;
+  color: var(--brand);
+}
+
+.kb-key-work,
+.kb-key-jump {
+  font-size: 0.62rem;
+}
+
+/* Status light: dark until the key is latched on, like caps lock */
+.kb-led {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  width: 14px;
+  height: 3px;
+  margin-left: -7px;
+  border-radius: 2px;
+  background: #c9d2de;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  transition: opacity 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.kb-key:hover .kb-led {
+  opacity: 1;
+}
+
+@media (hover: hover) {
+  .kb-key:hover .kb-key-face {
+    transform: translateY(1px);
+  }
+  .kb-key:hover .kb-key-logo {
+    transform: rotate(-9deg) scale(1.12);
+  }
+}
+
+/* Mid-press: face bottoms out on the skirt */
+.kb-key:active .kb-key-face {
+  transform: translateY(4px);
+}
+
+.kb-key:active {
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.15),
+    0 3px 5px -3px rgba(0, 0, 0, 0.35);
+}
+
+/* Latched: the key stays half down, turns navy, LED glows */
+.kb-key.is-active {
+  background: linear-gradient(180deg, #04213f, #021426);
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.2),
+    0 4px 6px -4px rgba(0, 0, 0, 0.4);
+}
+
+.kb-key.is-active .kb-key-face {
+  transform: translateY(3px);
+  background: linear-gradient(180deg, #0b4884, var(--brand));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.2);
+  color: #fff;
+}
+
+.kb-key.is-active:active .kb-key-face {
+  transform: translateY(5px);
+}
+
+.kb-key.is-active .kb-led {
+  opacity: 1;
+  background: #8dffb8;
+  box-shadow: 0 0 6px 1px rgba(110, 255, 170, 0.75);
+}
+
+.kb-key.is-active .kb-key-legends,
+.kb-key.is-active .kb-key-count {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Work-only keys have no projects to filter, so they read a touch quieter */
+.kb-key.is-work-only .kb-key-face {
+  background: linear-gradient(180deg, #f4f6f9, #e7ecf2);
+}
+
+.kb-key:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 3px;
+}
+
+/* Tiny keycaps used in the legend under the plates */
+.kb-mini {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--shadow-sm);
+  min-width: 1.4rem;
+  height: 1.4rem;
+  padding: 0 0.3rem;
+  border-radius: 5px;
+  background: linear-gradient(180deg, #ffffff, #f1f4f8);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 2px 0 #b3bfcf;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--brand);
+}
+
+.tech-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem 1.5rem;
+  min-height: 2rem;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.tech-status strong {
+  color: var(--brand);
+}
+
+.tech-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.tech-clear-btn,
+.projects-filter-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: none;
+  background: none;
+  padding: 0.25rem 0;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--brand);
   cursor: pointer;
-  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
-}
-
-.tech-nav:hover {
-  background: var(--brand);
-  color: #fff;
-  transform: translateY(-50%) scale(1.08);
-}
-
-.tech-prev {
-  left: 0;
-}
-
-.tech-next {
-  right: 0;
-}
-
-@media (max-width: 576px) {
-  .tech-slider {
-    padding: 0;
-  }
-  .tech-nav {
-    display: none; /* swipe on touch devices */
-  }
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }

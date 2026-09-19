@@ -117,6 +117,8 @@ export const EXPERIENCE = [
       "Finishing up in October 2026 to return to college for 4th year.",
     ],
     skills: ["Software Infrastructure", "Software Design"],
+    // Names match the logos in portfolio.json, so the card can show them
+    stack: ["C#", ".NET", "Angular", "TypeScript", "SQL", "Azure"],
   },
   {
     id: "qtp",
@@ -258,7 +260,7 @@ export function buildKnowledgeBase(now = new Date()) {
   const p = PROFILE;
   const jobs = EXPERIENCE.map(
     (j) =>
-      `- ${j.role} at ${j.company}${j.employmentType ? ` (${j.employmentType})` : ""}, ${dateRange(j)} [${durationLabel(j.start, j.end, now)}]${j.stages ? ` (progression: ${j.stages.map((s) => `${s.title} ${formatMonth(s.start)}–${formatMonth(s.end)}`).join(", then ")})` : ""}, ${j.location}, ${j.workplace}${isCurrent(j, now) ? ` (CURRENT ROLE${j.end ? `, finishing ${formatMonth(j.end)}` : ""})` : ""}. ${j.highlights.join(" ")} Skills: ${j.skills.join(", ")}.`
+      `- ${j.role} at ${j.company}${j.employmentType ? ` (${j.employmentType})` : ""}, ${dateRange(j)} [${durationLabel(j.start, j.end, now)}]${j.stages ? ` (progression: ${j.stages.map((s) => `${s.title} ${formatMonth(s.start)}–${formatMonth(s.end)}`).join(", then ")})` : ""}, ${j.location}, ${j.workplace}${isCurrent(j, now) ? ` (CURRENT ROLE${j.end ? `, finishing ${formatMonth(j.end)}` : ""})` : ""}. ${j.highlights.join(" ")} Skills: ${j.skills.join(", ")}.${j.stack ? ` Tech stack: ${j.stack.join(", ")}.` : ""}`
   ).join("\n");
   const projects = PROJECTS.map((pr) => {
     const details = pr.details ? `\n${pr.details.map((d) => `  - ${d}`).join("\n")}` : "";

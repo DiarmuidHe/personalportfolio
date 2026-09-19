@@ -3,11 +3,12 @@ import { Element } from "react-scroll";
 import { useEffect, useRef, useState } from "react";
 import { Link, useMatch, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { FaArrowRight, FaChevronDown, FaChevronUp, FaLock } from "react-icons/fa";
+import { FaArrowRight, FaChevronDown, FaChevronUp, FaLock, FaTimes } from "react-icons/fa";
 import data from "../../JsonFolders/portfolio.json"
 import { projectSlug } from "../../data/profile";
 import SectionHeading from "../SectionHeading/SectionHeading";
 import ProjectDetail from "./ProjectDetail";
+import TechStack from "./TechStack";
 import './Project.css'
 
 const grid = {
@@ -22,7 +23,7 @@ const cardIn = {
 
 // A card that tilts slightly towards the pointer for a bit of depth.
 // Clicking it opens the project's write-up at /projects/:slug.
-function ProjectCard({ proj, hideMedia, onOpen }) {
+function ProjectCard({ proj, hideMedia, onOpen, techFilter }) {
   const x = useMotionValue(0.5);
   const y = useMotionValue(0.5);
   const rotateX = useSpring(useTransform(y, [0, 1], [6, -6]), { stiffness: 200, damping: 20 });
@@ -94,6 +95,7 @@ function ProjectCard({ proj, hideMedia, onOpen }) {
               </span>
             )}
           </span>
+          <TechStack stack={proj.stack} active={techFilter} />
         </div>
       </Link>
     </motion.article>
@@ -107,7 +109,7 @@ const more = PROJECTS.filter((p) => !p.featured);
 // Featured first, the same order the cards appear in, for the dialog's previous/next
 const ORDERED = [...featured, ...more];
 
-const ProjectsSection = () => {
+const ProjectsSection = ({ techFilter, onTechFilter }) => {
   const navigate = useNavigate();
   const match = useMatch("/projects/:slug");
   const index = match ? ORDERED.findIndex((p) => p.slug === match.params.slug) : -1;
@@ -149,6 +151,20 @@ const ProjectsSection = () => {
     setTimeout(() => setOrigin(null), 400);
   };
 
+  // With a technology picked, every matching project shows in one grid, featured or not
+  const filtered = techFilter ? ORDERED.filter((p) => p.stack?.includes(techFilter)) : null;
+
+  const card = (proj) => (
+    <div key={proj.title} className="col-12 col-sm-6 col-lg-4 d-flex">
+      <ProjectCard
+        proj={proj}
+        hideMedia={Boolean(selected) && origin === proj.slug}
+        onOpen={setOrigin}
+        techFilter={techFilter}
+      />
+    </div>
+  );
+
   const toggle = () => {
     // When collapsing, bring the section back into view so the page doesn't jump past it
     if (showMore) sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -161,60 +177,64 @@ const ProjectsSection = () => {
         <div className="container">
           <SectionHeading title="Projects" id="projects-title" />
 
-          <motion.div
-            className="row g-4"
-            variants={grid}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-          >
-            {featured.map((proj) => (
-              <div key={proj.title} className="col-12 col-sm-6 col-lg-4 d-flex">
-                <ProjectCard
-                  proj={proj}
-                  hideMedia={Boolean(selected) && origin === proj.slug}
-                  onOpen={setOrigin}
-                />
+          {filtered ? (
+            <>
+              <div className="projects-filter" role="status">
+                <span>
+                  Showing <strong>{filtered.length}</strong> project{filtered.length === 1 ? "" : "s"} built with{" "}
+                  <strong>{techFilter}</strong>
+                </span>
+                <button type="button" className="projects-filter-clear" onClick={() => onTechFilter(null)}>
+                  <FaTimes aria-hidden="true" /> Show all projects
+                </button>
               </div>
-            ))}
-          </motion.div>
 
-          <AnimatePresence initial={false}>
-            {showMore && (
+              <motion.div key={techFilter} className="row g-4" variants={grid} initial="hidden" animate="visible">
+                {filtered.map(card)}
+              </motion.div>
+            </>
+          ) : (
+            <>
               <motion.div
-                id="more-projects"
-                className="row g-4 mt-0"
+                className="row g-4"
                 variants={grid}
                 initial="hidden"
-                animate="visible"
-                exit={{ opacity: 0, transition: { duration: 0.2 } }}
+                whileInView="visible"
+                viewport={{ once: true, margin: "-60px" }}
               >
-                {more.map((proj) => (
-                  <div key={proj.title} className="col-12 col-sm-6 col-lg-4 d-flex">
-                    <ProjectCard
-                      proj={proj}
-                      hideMedia={Boolean(selected) && origin === proj.slug}
-                      onOpen={setOrigin}
-                    />
-                  </div>
-                ))}
+                {featured.map(card)}
               </motion.div>
-            )}
-          </AnimatePresence>
 
-          {more.length > 0 && (
-            <div className="projects-more">
-              <button
-                type="button"
-                className="btn-brand-outline"
-                onClick={toggle}
-                aria-expanded={showMore}
-                aria-controls="more-projects"
-              >
-                {showMore ? "Show fewer projects" : `View more projects (${more.length})`}
-                {showMore ? <FaChevronUp aria-hidden="true" /> : <FaChevronDown aria-hidden="true" />}
-              </button>
-            </div>
+              <AnimatePresence initial={false}>
+                {showMore && (
+                  <motion.div
+                    id="more-projects"
+                    className="row g-4 mt-0"
+                    variants={grid}
+                    initial="hidden"
+                    animate="visible"
+                    exit={{ opacity: 0, transition: { duration: 0.2 } }}
+                  >
+                    {more.map(card)}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {more.length > 0 && (
+                <div className="projects-more">
+                  <button
+                    type="button"
+                    className="btn-brand-outline"
+                    onClick={toggle}
+                    aria-expanded={showMore}
+                    aria-controls="more-projects"
+                  >
+                    {showMore ? "Show fewer projects" : `View more projects (${more.length})`}
+                    {showMore ? <FaChevronUp aria-hidden="true" /> : <FaChevronDown aria-hidden="true" />}
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </div>
       </section>

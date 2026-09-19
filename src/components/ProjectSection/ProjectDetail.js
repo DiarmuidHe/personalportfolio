@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { FaArrowLeft, FaArrowRight, FaExternalLinkAlt, FaGithub, FaLock, FaTimes } from "react-icons/fa";
 import { PROFILE } from "../../data/profile";
 import { askChat } from "../ChatSection/chatEvents";
+import TechStack from "./TechStack";
 
 // The longer project notes in profile.js are written for the chat assistant.
 // Drop the lines that only make sense there (availability notes, one-line recaps, aliases).
@@ -175,6 +176,8 @@ export default function ProjectDetail({ proj, slug, prev, next, sharedMedia, onC
               ))}
             </section>
           )}
+
+          <TechStack stack={proj.stack} className="pd-stack" />
         </div>
 
         <nav className="pd-pager" aria-label="Other projects">
