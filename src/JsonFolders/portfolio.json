@@ -113,8 +113,7 @@
             {
                 "src": "https://diarmuidsportfolio.s3.eu-north-1.amazonaws.com/project_imgs/aabci.png",
                 "alt": "AABCI ballot verification",
-                "link": null,
-                "linkNote": "Available upon request",
+                "link": "https://github.com/AABCI-Group/Ballot-Recognition-software",
                 "title": "AABCI - AI Automated Ballot Counter Ireland",
                 "featured": true,
                 "highlight": "Built in collaboration with an electoral commission consultant.",

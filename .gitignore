@@ -11,6 +11,9 @@
 # production
 /build
 
+# generated CV preview (the PDF in /public is committed)
+/cv/out
+
 # misc
 .DS_Store
 .env.local
