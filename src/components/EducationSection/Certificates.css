@@ -1,0 +1,23 @@
+.certificates { margin-top: 2.5rem; scroll-margin-top: 6rem; }
+.certificates h3 { color: var(--brand); font-size: 1.4rem; font-weight: 750; }
+.cert-intro, .cert-meta { color: var(--text-muted); }
+.cert-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.cert-card { display: flex; align-items: flex-start; gap: 1rem; padding: 1.4rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); text-decoration: none; transition: border-color .2s, box-shadow .2s; }
+.cert-card:hover { border-color: var(--brand); box-shadow: var(--shadow-md); }
+.cert-card:focus-visible, .cert-close:focus-visible { outline: 3px solid var(--brand); outline-offset: 4px; }
+.cert-icon { flex-shrink: 0; margin-top: .15rem; font-size: 1.5rem; color: var(--edu-gold-deep); }
+.cert-card h4 { margin: 0 0 .6rem; color: var(--brand); font-size: 1rem; font-weight: 700; line-height: 1.5; }
+.cert-meta { margin: 0 0 .3rem; font-size: .88rem; }
+.cert-cta { display: flex; align-items: center; gap: .5rem; margin-top: 1rem; color: var(--brand); font-size: .88rem; font-weight: 650; }
+.cert-dialog { padding: 0; width: min(900px, calc(100% - 2rem)); max-height: calc(100dvh - 2rem); border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); color: var(--text); box-shadow: var(--shadow-lg); overscroll-behavior: contain; }
+.cert-dialog::backdrop { background: rgba(4, 24, 46, .65); }
+.cert-dialog-content { position: relative; padding: 2rem; }
+.cert-close { position: absolute; top: .8rem; right: .8rem; display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--brand); background: var(--surface); }
+.cert-eyebrow { padding-right: 2rem; color: var(--brand); text-transform: uppercase; letter-spacing: .06em; font-size: .75rem; font-weight: 700; }
+.cert-dialog h2 { padding-right: 1.5rem; color: var(--brand); font-size: clamp(1.25rem, 3vw, 1.8rem); }
+.cert-preview { display: block; width: 100%; height: auto; margin: 1.5rem 0; border: 1px solid var(--border); background: white; }
+@media (max-width: 575.98px) {
+  .cert-grid { grid-template-columns: 1fr; }
+  .cert-card { padding: 1.1rem; }
+  .cert-dialog-content { padding: 1.25rem; }
+}

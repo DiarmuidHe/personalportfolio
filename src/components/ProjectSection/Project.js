@@ -112,6 +112,7 @@ const ORDERED = [...featured, ...more];
 const ProjectsSection = ({ techFilter, onTechFilter }) => {
   const navigate = useNavigate();
   const match = useMatch("/projects/:slug");
+  const certificateMatch = useMatch("/certificates/:slug");
   const index = match ? ORDERED.findIndex((p) => p.slug === match.params.slug) : -1;
   const selected = index >= 0 ? ORDERED[index] : null;
 
@@ -136,8 +137,8 @@ const ProjectsSection = ({ techFilter, onTechFilter }) => {
 
   // Each write-up gets its own tab title, so shared links and history read properly
   useEffect(() => {
-    document.title = selected ? `${selected.title} | Diarmuid Hession` : SITE_TITLE;
-  }, [selected]);
+    if (!certificateMatch) document.title = selected ? `${selected.title} | Diarmuid Hession` : SITE_TITLE;
+  }, [selected, certificateMatch]);
 
   // Unknown project slug: fall back to the home page
   useEffect(() => {

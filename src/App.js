@@ -76,7 +76,7 @@ function MainPage() {
   );
 }
 
-// Short cross-fade between pages. /projects/... stays on the main page (it only opens a dialog),
+// Short cross-fade between pages. Project and certificate links stay on the main page (they open dialogs),
 // so it shares the main page's key and doesn't remount anything.
 function Page({ children }) {
   return (
@@ -94,7 +94,7 @@ function Page({ children }) {
 function AnimatedRoutes() {
   const location = useLocation();
   const navigate = useNavigate();
-  const pageKey = location.pathname === "/" || location.pathname.startsWith("/projects/") ? "main" : location.pathname;
+  const pageKey = location.pathname === "/" || /^\/(projects|certificates)\//.test(location.pathname) ? "main" : location.pathname;
 
   // Links in chat answers (e.g. a project write-up) open in place
   useEffect(() => {
@@ -111,9 +111,10 @@ function AnimatedRoutes() {
   return (
     <AnimatePresence mode="wait" initial={false}>
       <Routes location={location} key={pageKey}>
-        {/* Main page. Project write-ups open over it as a dialog, with their own shareable URL */}
+        {/* Main page. Projects and certificates open as dialogs with their own shareable URLs. */}
         <Route path="/" element={<Page><MainPage /></Page>}>
           <Route path="projects/:slug" element={null} />
+          <Route path="certificates/:slug" element={null} />
         </Route>
 
         {/* Weather page */}

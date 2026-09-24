@@ -6,6 +6,7 @@ import SectionHeading from "../SectionHeading/SectionHeading";
 import { PROFILE } from "../../data/profile";
 import { askChat } from "../ChatSection/chatEvents";
 import "./Education.css";
+import Certificates from "./Certificates";
 
 const FIRST_CLASS = 70; // Irish honours boundary for a 1:1
 const EASE = [0.22, 1, 0.36, 1];
@@ -85,6 +86,7 @@ export default function Education() {
               </div>
             </div>
           </motion.article>
+          <Certificates />
         </div>
       </section>
     </Element>

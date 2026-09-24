@@ -94,6 +94,42 @@ export const PROFILE = {
   ],
 };
 
+// Course completion certificates shared by the site and CV.
+export const CERTIFICATES = [
+  {
+    slug: "agile-software-requirements",
+    title: "Agile Software Projects: Software Requirements",
+    shortTitle: "Agile requirements",
+    issuer: "Skillsoft",
+    completed: "2026-07-23",
+    detail: "Training credit value: 1.25",
+  },
+  {
+    slug: "system-testing-reliability",
+    title: "Decision Analysis and Management: System Testing & Reliability",
+    shortTitle: "System testing",
+    issuer: "Department of Social Protection",
+    completed: "2026-07-23",
+    detail: "Duration: 1 hr 22 min",
+  },
+  {
+    slug: "git-devops-workflows",
+    title: "Using Git for DevOps: Managing Conflict & Effectively Using Git Workflow",
+    shortTitle: "Git workflows",
+    issuer: "Department of Social Protection",
+    completed: "2026-04-23",
+    detail: "Duration: 58 min",
+  },
+  {
+    slug: "working-with-git",
+    title: "Working with Git",
+    shortTitle: "Working with Git",
+    issuer: "Department of Social Protection",
+    completed: "2026-04-22",
+    detail: "Duration: 1 hr 7 min",
+  },
+];
+
 // type: "tech" roles are software/IT; "other" roles show transferable skills.
 // Dates are "YYYY-MM". A role is current until the end of its end month; end: null means no end date yet.
 // Optional stages show progression within one employer.
@@ -114,7 +150,7 @@ export const EXPERIENCE = [
     workplace: "Hybrid",
     highlights: [
       "Joined as a software engineering intern for three months, then stayed on as a Software Engineer.",
-      "Works on software infrastructure and software design within a large public-sector organisation.",
+      "Worked on MyWelfare at the Department of Social Protection.",
       "Finishing up in October 2026 to return to college for 4th year.",
     ],
     skills: ["Software Infrastructure", "Software Design"],

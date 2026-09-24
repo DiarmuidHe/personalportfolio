@@ -87,9 +87,9 @@ function projectTitle(p, bySiteTitle, PROFILE) {
 }
 
 // ---------- sections ----------
-function skillsSection(PROFILE) {
+function skillsSection(CV, PROFILE) {
   const seen = new Set();
-  const rows = Object.entries(PROFILE.skills)
+  const rows = Object.entries(CV.skills || PROFILE.skills)
     .map(([group, items]) => {
       const kept = items.filter((s) => {
         const k = s.toLowerCase();
@@ -98,15 +98,15 @@ function skillsSection(PROFILE) {
         return true;
       });
       if (!kept.length) return "";
-      return `<li><strong>${esc(group)}</strong> - ${esc(kept.join(", "))}</li>`;
+      return `<li><strong>${esc(group)}:</strong> ${esc(kept.join(", "))}</li>`;
     })
     .join("");
   return `<section><h2>TECHNICAL SKILLS</h2><ul class="bullets">${rows}</ul></section>`;
 }
 
-function experienceSection(CV, EXPERIENCE) {
+function experienceSection(entries, EXPERIENCE, heading) {
   const byId = Object.fromEntries(EXPERIENCE.map((j) => [j.id, j]));
-  const blocks = CV.experience.map((entry) => {
+  const blocks = entries.map((entry) => {
     const job = byId[entry.id];
     if (!job) {
       warn(`No role with id "${entry.id}" in profile.js EXPERIENCE - skipped.`);
@@ -124,7 +124,7 @@ function experienceSection(CV, EXPERIENCE) {
       <ul class="bullets">${bullets.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>
     </div>`;
   });
-  return `<section><h2>EXPERIENCES</h2>${blocks.join("")}</section>`;
+  return `<section><h2>${esc(heading)}</h2>${blocks.join("")}</section>`;
 }
 
 function projectsSection(CV, PROJECTS, PROFILE) {
@@ -132,7 +132,7 @@ function projectsSection(CV, PROJECTS, PROFILE) {
   const blocks = CV.projects.map(
     (p) => `<div class="entry">
       <p class="entry-head">${projectTitle(p, bySiteTitle, PROFILE)} | <span class="tech">${esc(p.tech)}</span></p>
-      <ul class="bullets"><li>${esc(p.blurb)}</li></ul>
+      <ul class="bullets">${p.bullets.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>
     </div>`
   );
   return `<section class="projects"><h2>PROJECTS</h2>${blocks.join("")}</section>`;
@@ -154,31 +154,34 @@ function otherProjectsSection(CV, PROJECTS, PROFILE) {
 
 function educationSection(CV, PROFILE) {
   const { education } = PROFILE;
-  const modules = education.yearThree?.modules || [];
+  const modules = (education.yearThree?.modules || []).filter((m) =>
+    CV.education.modules.includes(m.title)
+  );
   const rows = modules
-    .map((m) => `<tr><td>${esc(m.title)}</td><td class="grade">${esc(m.grade)}</td></tr>`)
+    .map((m) => `<tr><td>${esc(m.title)}</td><td class="grade">${esc(m.grade)}%</td></tr>`)
     .join("");
   const classification = education.yearThree?.classification || "";
   return `<section class="education"><h2>EDUCATION</h2>
-    <p class="edu-line"><strong>${esc(education.degree.replace(", Level 8", " - Level 8"))}</strong> | <em>${esc(CV.education.status)}</em></p>
-    <p class="edu-line"><strong>GPA:</strong> <em>${esc(classification)}</em></p>
+    <p class="edu-line"><strong>${esc(education.degree)}</strong> | <em>${esc(education.school)}</em></p>
+    <p class="edu-line">Expected graduation: ${esc(education.graduation)}</p>
+    <p class="edu-line"><strong>Year 3 result: ${esc(classification)}</strong></p>
     <table class="grades">
       <caption>${esc(CV.education.gradesYearLabel)}</caption>
-      <thead><tr><th>Course Title</th><th>Final Grade</th></tr></thead>
+      <thead><tr><th>Module</th><th>Grade</th></tr></thead>
       <tbody>${rows}</tbody>
     </table>
   </section>`;
 }
 
-function softSkillsSection(CV) {
-  const items = CV.softSkills
-    .map((s) => `<li><strong>${esc(s.name)}</strong> \u2013 ${esc(s.text)}</li>`)
+function workingPracticesSection(CV) {
+  const items = CV.workingPractices
+    .map((s) => `<li><strong>${esc(s.name)}:</strong> ${esc(s.text)}</li>`)
     .join("");
-  return `<section><h2>SOFT SKILLS</h2><ul class="bullets">${items}</ul></section>`;
+  return `<section><h2>TEAMWORK & COMMUNICATION</h2><ul class="bullets">${items}</ul></section>`;
 }
 
 // ---------- page ----------
-function render({ PROFILE, EXPERIENCE, PROJECTS }, CV, icons, logo) {
+function render({ PROFILE, EXPERIENCE, PROJECTS, CERTIFICATES }, CV, icons, logo) {
   const links = [
     ["email", `mailto:${PROFILE.email}`, PROFILE.email],
     ["portfolio", PROFILE.links.portfolio, "Portfolio"],
@@ -302,7 +305,7 @@ function render({ PROFILE, EXPERIENCE, PROJECTS }, CV, icons, logo) {
   table.grades th, table.grades td { border: 0.75pt solid #34495E; padding: 1pt 5pt; }
   table.grades thead th { background: #34495E; color: #fff; text-align: center; }
   table.grades td.grade { text-align: center; width: 70pt; }
-  .refs { margin: 0; }
+  .training { margin: 0; }
 </style>
 </head>
 <body>
@@ -313,13 +316,14 @@ function render({ PROFILE, EXPERIENCE, PROJECTS }, CV, icons, logo) {
   </header>
 
   <main class="sheet">
-    ${skillsSection(PROFILE)}
-    ${experienceSection(CV, EXPERIENCE)}
+    ${skillsSection(CV, PROFILE)}
+    ${experienceSection(CV.experience.filter((entry) => ["dsp", "qtp"].includes(entry.id)), EXPERIENCE, "SOFTWARE & IT EXPERIENCE")}
     ${projectsSection(CV, PROJECTS, PROFILE)}
     ${otherProjectsSection(CV, PROJECTS, PROFILE)}
     ${educationSection(CV, PROFILE)}
-    ${softSkillsSection(CV)}
-    <section><h2>REFERENCES</h2><p class="refs">${esc(CV.references)}</p></section>
+    ${experienceSection(CV.experience.filter((entry) => !["dsp", "qtp"].includes(entry.id)), EXPERIENCE, "ADDITIONAL EXPERIENCE")}
+    ${workingPracticesSection(CV)}
+    <section><h2>PROFESSIONAL DEVELOPMENT</h2><p class="training">${CERTIFICATES.map((certificate) => `<a href="${esc(PROFILE.links.portfolio)}/certificates/${esc(certificate.slug)}">${esc(certificate.shortTitle)}</a>`).join(" · ")} (2026).</p></section>
   </main>
 </body>
 </html>`;
